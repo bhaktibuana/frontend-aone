@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import LandingPage from "@/pages/base/LandingPage.vue";
+const LandingPage = () => import("@/pages/base/LandingPage.vue");
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -14,7 +14,9 @@ export const router = createRouter({
   ],
 });
 
-router.beforeEach((to, _, next) => {
+router.beforeEach((_, __, next) => {
+  // const { isPrivatePage } = to.meta;
+
   window.scrollTo({
     top: 0,
     left: 0,
