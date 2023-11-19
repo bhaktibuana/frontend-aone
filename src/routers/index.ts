@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+import { AuthenticationRoutes } from "@/routers/Authentication";
+
 const LandingPage = () => import("@/pages/base/LandingPage.vue");
 
 export const router = createRouter({
   history: createWebHistory(),
   routes: [
+    ...AuthenticationRoutes,
     {
       path: "/",
       component: LandingPage,

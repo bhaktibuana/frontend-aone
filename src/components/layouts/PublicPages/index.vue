@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import FooterComponent from "@/components/layouts/PublicPages/Footer.vue";
+</script>
+
 <template>
   <a-layout class="layout-wrapper">
     <a-layout-content class="content-wrapper">
@@ -6,18 +10,6 @@
     </a-layout-content>
   </a-layout>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-import FooterComponent from "@/components/layouts/PublicPages/Footer.vue";
-
-export default defineComponent({
-  components: {
-    FooterComponent,
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .layout-wrapper {

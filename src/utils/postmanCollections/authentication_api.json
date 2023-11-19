@@ -1,0 +1,437 @@
+{
+	"info": {
+		"_postman_id": "832f70b7-468d-48a8-9b71-102062130d16",
+		"name": "Authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6105071"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{x_access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Bhakti\",\r\n    \"lastName\": \"Mega Buana\",\r\n    \"username\": \"bhaks3938\",\r\n    \"email\": \"bhaktibuana19@gmail.com\",\r\n    \"password\": \"1234567890\",\r\n    \"encrypted\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{api_route}}/auth/register",
+							"host": [
+								"{{base_url}}{{api_route}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 - Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Bhakti\",\r\n    \"lastName\": \"Mega Buana\",\r\n    \"username\": \"bhaks3938\",\r\n    \"email\": \"bhaktibuana19@gmail.com\",\r\n    \"password\": \"1234567890\",\r\n    \"encrypted\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/register",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Registration success\",\n    \"status\": true,\n    \"statusCode\": 201,\n    \"data\": {\n        \"isVerified\": false,\n        \"isActive\": true,\n        \"isDeleted\": false,\n        \"id\": 5,\n        \"firstName\": \"Bhakti\",\n        \"lastName\": \"Mega Buana\",\n        \"username\": \"bhaks3938\",\n        \"email\": \"bhaktibuana19@gmail.com\",\n        \"roleId\": 2,\n        \"createdAt\": \"2023-11-17T19:20:18.730Z\",\n        \"createdBy\": \"User Register\",\n        \"updatedAt\": \"2023-11-17T19:20:18.730Z\",\n        \"updatedBy\": \"User Register\"\n    },\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "409 - Register (Email Exist)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Bhakti\",\r\n    \"lastName\": \"Mega Buana\",\r\n    \"username\": \"bhaks3938\",\r\n    \"email\": \"bhaktibuana19@gmail.com\",\r\n    \"password\": \"1234567890\",\r\n    \"encrypted\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/register",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Email already registered\",\n    \"status\": false,\n    \"statusCode\": 409,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "409 - Register (Username Exist)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Bhakti\",\r\n    \"lastName\": \"Mega Buana\",\r\n    \"username\": \"bhaks3938\",\r\n    \"email\": \"bhaktibuana12@gmail.com\",\r\n    \"password\": \"1234567890\",\r\n    \"encrypted\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/register",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Username already registered\",\n    \"status\": false,\n    \"statusCode\": 409,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Email",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{x_access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}{{api_route}}/auth/checkEmail?email=bhaktibuana@gmail.com",
+							"host": [
+								"{{base_url}}{{api_route}}"
+							],
+							"path": [
+								"auth",
+								"checkEmail"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "bhaktibuana@gmail.com"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Check Email",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/checkEmail?email=bhaktibuana@gmail.com",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"checkEmail"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "bhaktibuana@gmail.com"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Email is available\",\r\n    \"status\": true,\r\n    \"statusCode\": 200,\r\n    \"data\": true,\r\n    \"pagination\": {}\r\n}"
+						},
+						{
+							"name": "409 - Check Email",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/checkEmail?email=bhaktibuana19@gmail.com",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"checkEmail"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "bhaktibuana19@gmail.com"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Email is not available\",\n    \"status\": false,\n    \"statusCode\": 409,\n    \"data\": true,\n    \"pagination\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Username",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{x_access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}{{api_route}}/auth/checkUsername?username=bhaks3938",
+							"host": [
+								"{{base_url}}{{api_route}}"
+							],
+							"path": [
+								"auth",
+								"checkUsername"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "bhaks3938"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "409 - Check Username",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/checkUsername?username=bhaks3938",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"checkUsername"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "bhaks3938"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Username is not available\",\r\n    \"status\": false,\r\n    \"statusCode\": 409,\r\n    \"data\": true,\r\n    \"pagination\": {}\r\n}"
+						},
+						{
+							"name": "200 - Check Username",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/checkUsername?username=bhaktibuana",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"checkUsername"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "bhaktibuana"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Username is available\",\n    \"status\": true,\n    \"statusCode\": 200,\n    \"data\": true,\n    \"pagination\": {}\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
