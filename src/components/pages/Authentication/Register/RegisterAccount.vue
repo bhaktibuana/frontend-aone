@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { PropType, reactive, watch } from "vue";
+import { PropType, reactive, ref, watch } from "vue";
+import { Rule } from "ant-design-vue/es/form";
 
 import BaseButton from "@/components/base/Button/Button.vue";
 import BaseForm from "@/components/base/Form/Form.vue";
@@ -30,6 +31,8 @@ const props = defineProps({
 
 const emit = defineEmits(["update-formData"]);
 
+const emailValidateStatus = ref<boolean>(false);
+
 const internalFormData = reactive<IRegisterAccountFormData>(props.formData);
 
 const isFormDataChanged = computed<IRegisterAccountFormData>({
@@ -48,6 +51,22 @@ const handleFinishForm = (isError: boolean, values: Object): void => {
     props.emailState === "success"
   )
     console.log(values);
+};
+
+const handleValidateEmail = async (
+  _rule: Rule,
+  value: string
+): Promise<void> => {
+  const emailRegex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  emailValidateStatus.value = false;
+  if (!value) {
+    return Promise.reject("Email is required");
+  } else if (!emailRegex.test(value)) {
+    return Promise.reject("Invalid Email format");
+  } else {
+    emailValidateStatus.value = true;
+    return Promise.resolve();
+  }
 };
 
 watch(
@@ -97,9 +116,14 @@ watch(
       placeholder="Insert Your Email"
       v-model:value="internalFormData.email"
       hasFeedback
-      :validate-status="emailState"
-      required
-      :rules="[{ type: 'email', message: 'Invalid Email format' }]"
+      :validate-status="emailValidateStatus ? emailState : undefined"
+      :rules="[
+        {
+          required: true,
+          trigger: 'change',
+          validator: handleValidateEmail,
+        },
+      ]"
     />
 
     <div class="button-wrapper">

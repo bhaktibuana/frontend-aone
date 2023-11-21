@@ -87,7 +87,7 @@ watch(
     :rules="[
       {
         required: required,
-        message: `${label} wajib diisi`,
+        message: `${label} is required`,
       },
       ...rules,
     ]"
