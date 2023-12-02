@@ -52,9 +52,9 @@ const handleFinishForm = (isError: boolean, values: Object): void => {
 
         <base-form-radio
           label="Membership"
-          name="membership"
+          name="subscriptionCode"
           :options="membershipOptions"
-          v-model:value="formData.membershipKey"
+          v-model:value="formData.subscriptionCode"
           required
         />
       </div>
@@ -69,13 +69,13 @@ const handleFinishForm = (isError: boolean, values: Object): void => {
             placeholder="Insert Cardholder Name"
             v-model:value="formData.cardholderName"
             :required="
-              formData.membershipKey === 'personal' ||
-              formData.membershipKey === 'bussiness'
+              formData.subscriptionCode === 'personal' ||
+              formData.subscriptionCode === 'bussiness'
             "
             :disabled="
               !(
-                formData.membershipKey === 'personal' ||
-                formData.membershipKey === 'bussiness'
+                formData.subscriptionCode === 'personal' ||
+                formData.subscriptionCode === 'bussiness'
               )
             "
           />
@@ -86,13 +86,13 @@ const handleFinishForm = (isError: boolean, values: Object): void => {
             placeholder="XXXX XXXX XXXX XXXX"
             v-model:value="formData.cardNumber"
             :required="
-              formData.membershipKey === 'personal' ||
-              formData.membershipKey === 'bussiness'
+              formData.subscriptionCode === 'personal' ||
+              formData.subscriptionCode === 'bussiness'
             "
             :disabled="
               !(
-                formData.membershipKey === 'personal' ||
-                formData.membershipKey === 'bussiness'
+                formData.subscriptionCode === 'personal' ||
+                formData.subscriptionCode === 'bussiness'
               )
             "
           />
@@ -104,30 +104,30 @@ const handleFinishForm = (isError: boolean, values: Object): void => {
               placeholder="e.g 354"
               v-model:value="formData.cardCCV"
               :required="
-                formData.membershipKey === 'personal' ||
-                formData.membershipKey === 'bussiness'
+                formData.subscriptionCode === 'personal' ||
+                formData.subscriptionCode === 'bussiness'
               "
               :disabled="
                 !(
-                  formData.membershipKey === 'personal' ||
-                  formData.membershipKey === 'bussiness'
+                  formData.subscriptionCode === 'personal' ||
+                  formData.subscriptionCode === 'bussiness'
                 )
               "
             />
 
             <base-form-card-expire-date
               label="Expiration"
-              name="cardExpireDate"
+              name="cardExpiration"
               placeholder="MM/YY"
-              v-model:value="formData.cardExpireDate"
+              v-model:value="formData.cardExpiration"
               :required="
-                formData.membershipKey === 'personal' ||
-                formData.membershipKey === 'bussiness'
+                formData.subscriptionCode === 'personal' ||
+                formData.subscriptionCode === 'bussiness'
               "
               :disabled="
                 !(
-                  formData.membershipKey === 'personal' ||
-                  formData.membershipKey === 'bussiness'
+                  formData.subscriptionCode === 'personal' ||
+                  formData.subscriptionCode === 'bussiness'
                 )
               "
             />

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref, watch } from "vue";
 import { useRouter } from "vue-router";
+import { notification } from "ant-design-vue";
+import { AxiosError, AxiosResponse } from "axios";
 
 import { APIAuthentication } from "@/apis/Authentication";
 
@@ -13,17 +15,23 @@ import ChoosePlan from "@/components/pages/Authentication/Register/ChoosePlan.vu
 import RegisterAccount from "@/components/pages/Authentication/Register/RegisterAccount.vue";
 import RegisterStepper from "@/components/pages/Authentication/Register/RegisterStepper.vue";
 import RegisterCredentials from "@/components/pages/Authentication/Register/Credentials.vue";
+import RegisterSuccess from "@/components/pages/Authentication/Register/RegisterSuccess.vue";
+import BaseButton from "@/components/base/Button/Button.vue";
 
-import { debounce } from "@/utils/functions";
+import { mailIcon } from "@/assets/icons";
+
+import { debounce, hashPassword } from "@/utils/functions";
 
 import { ICheckUsername } from "@/types/apis/Authentication/queries/ICheckUsernameQuery";
 import { ICheckEmail } from "@/types/apis/Authentication/queries/ICheckEmailQuery";
+
 import {
   IStepsItem,
   IRegisterAccountFormData,
   TValidateStatus,
   IChoosePlanFormData,
   ICredentialsFormData,
+  IRegisterFormData,
 } from "@/types";
 
 const router = useRouter();
@@ -33,6 +41,7 @@ const isOnCheckUsername = ref<boolean>(false);
 const usernameState = ref<TValidateStatus>(undefined);
 const isOnCheckEmail = ref<boolean>(false);
 const emailState = ref<TValidateStatus>(undefined);
+const registerButtonLabel = ref<string>("Register");
 
 const stepList = reactive<IStepsItem[]>([
   {
@@ -60,6 +69,13 @@ const choosePlanFormData = reactive<IChoosePlanFormData>(
 const credentialsFormData = reactive<ICredentialsFormData>(
   {} as ICredentialsFormData
 );
+
+const formData = reactive<IRegisterFormData>({
+  loading: false,
+  data: {
+    encrypted: true,
+  },
+} as IRegisterFormData);
 
 const hanldeUpdateCurrentStep = (index: number): void => {
   if (currentStep.value === index) return;
@@ -109,13 +125,11 @@ const handleCheckEmail = async (params: ICheckEmail): Promise<void> => {
   }
 };
 
-const onFinishSection = () => {
+const onFinishSection = (): void => {
   currentStep.value += 1;
-  console.log(registerAccountFormData);
-  console.log(choosePlanFormData);
 };
 
-const handleStepOnValueChange = () => {
+const handleStepOnValueChange = (): void => {
   stepList.forEach((_, index) => {
     if (index === currentStep.value) {
       stepList[index].title = "In Progress";
@@ -123,6 +137,37 @@ const handleStepOnValueChange = () => {
       stepList[index].title = "Waiting";
     }
   });
+};
+
+const handleFinishAllForm = (): void => {
+  formData.loading = true;
+  registerButtonLabel.value = "Validating";
+  setTimeout(() => {
+    registerButtonLabel.value = "Processing";
+    setTimeout(() => {
+      handleRegisterAction();
+    }, 2000);
+  }, 2000);
+};
+
+const handleRegisterAction = async (): Promise<void> => {
+  formData.loading = true;
+  try {
+    formData.data.password = hashPassword(formData.data.password);
+    await APIAuthentication.register(formData.data);
+    currentStep.value = 3;
+  } catch (error: unknown | AxiosError) {
+    const err = error as AxiosError;
+    const errResponse = err?.response as AxiosResponse<{ message: string }>;
+    notification["error"]({
+      message: "Error",
+      description: `${errResponse.data.message}`,
+      placement: "bottom",
+    });
+  } finally {
+    formData.loading = false;
+    registerButtonLabel.value = "Register";
+  }
 };
 
 watch(currentStep, (newValue) => {
@@ -171,8 +216,12 @@ watch(isOnCheckEmail, (newValue) => {
 
 watch(
   () => registerAccountFormData,
-  () => {
+  (newValue) => {
     handleStepOnValueChange();
+    formData.data = {
+      ...formData.data,
+      ...newValue,
+    };
   },
   { deep: true }
 );
@@ -181,12 +230,16 @@ watch(
   () => choosePlanFormData,
   (newValue) => {
     handleStepOnValueChange();
-    if (newValue.membershipKey === "basic") {
+    if (newValue.subscriptionCode === "basic") {
       choosePlanFormData.cardholderName = undefined;
       choosePlanFormData.cardNumber = undefined;
       choosePlanFormData.cardCCV = undefined;
-      choosePlanFormData.cardExpireDate = undefined;
+      choosePlanFormData.cardExpiration = undefined;
     }
+    formData.data = {
+      ...formData.data,
+      ...newValue,
+    };
   },
   { deep: true }
 );
@@ -196,6 +249,18 @@ watch(
   () => {
     credentialsFormData.confirmPassword = undefined as never as string;
   }
+);
+
+watch(
+  () => credentialsFormData,
+  (newValue) => {
+    handleStepOnValueChange();
+    formData.data = {
+      ...formData.data,
+      ...newValue,
+    };
+  },
+  { deep: true }
 );
 
 onMounted(() => {
@@ -218,6 +283,7 @@ onMounted(() => {
           </div>
 
           <register-stepper
+            v-if="currentStep !== 3"
             :stepList="stepList"
             :currentStep="currentStep"
             @update-selectedIndex="hanldeUpdateCurrentStep"
@@ -240,12 +306,30 @@ onMounted(() => {
           <register-credentials
             v-else-if="currentStep === 2"
             :form-data="credentialsFormData"
+            :button-label="registerButtonLabel"
+            :loading="formData.loading"
+            @on-finish-credentials="handleFinishAllForm"
           />
 
-          <span class="login-info-text">
+          <span v-if="currentStep !== 3" class="login-info-text">
             Already have account?
             <span class="login-action" @click="handleLogin"> Login Here </span>
           </span>
+
+          <register-success
+            v-if="currentStep === 3"
+            :icon="mailIcon"
+            title="Account Registration Successful"
+            description="We have sent a verification link to your registered email. Check your email to verify your account"
+          />
+
+          <div
+            v-if="currentStep === 3"
+            class="button-wrapper"
+            @click="handleLogin"
+          >
+            <base-button label="Login" />
+          </div>
         </div>
       </base-card>
     </div>
@@ -294,5 +378,9 @@ onMounted(() => {
     color: $primary;
     cursor: pointer;
   }
+}
+
+.button-wrapper {
+  width: 100%;
 }
 </style>

@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Bhakti\",\r\n    \"lastName\": \"Mega Buana\",\r\n    \"username\": \"bhaks3938\",\r\n    \"email\": \"bhaktibuana19@gmail.com\",\r\n    \"password\": \"1234567890\",\r\n    \"encrypted\": false\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Bhakti\",\r\n    \"lastName\": \"Mega Buana\",\r\n    \"username\": \"bhaks3938\",\r\n    \"email\": \"bhaktibuana19@gmail.com\",\r\n    \"password\": \"1234567890\",\r\n    \"encrypted\": false,\r\n    \"subscriptionCode\": \"basic\",\r\n    \"cardholderName\": \"Bhakti Mega Buana\",\r\n    \"cardNumber\": \"4666312452346799\",\r\n    \"cardCCV\": \"435\",\r\n    \"cardExpiration\": \"06/28\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -54,7 +54,51 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"Bhakti\",\r\n    \"lastName\": \"Mega Buana\",\r\n    \"username\": \"bhaks3938\",\r\n    \"email\": \"bhaktibuana19@gmail.com\",\r\n    \"password\": \"1234567890\",\r\n    \"encrypted\": false\r\n}",
+									"raw": "{\r\n    \"firstName\": \"Bhakti\",\r\n    \"lastName\": \"Mega Buana\",\r\n    \"username\": \"bhaks3938\",\r\n    \"email\": \"bhaktibuana19@gmail.com\",\r\n    \"password\": \"1234567890\",\r\n    \"encrypted\": false,\r\n    \"subscriptionCode\": \"basic\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/register",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Registration success\",\n    \"status\": true,\n    \"statusCode\": 201,\n    \"data\": {\n        \"isVerified\": false,\n        \"isActive\": true,\n        \"isDeleted\": false,\n        \"id\": 5,\n        \"firstName\": \"Bhakti\",\n        \"lastName\": \"Mega Buana\",\n        \"username\": \"bhaks3938\",\n        \"email\": \"bhaktibuana19@gmail.com\",\n        \"roleId\": 2,\n        \"createdAt\": \"2023-11-17T19:20:18.730Z\",\n        \"createdBy\": \"User Register\",\n        \"updatedAt\": \"2023-11-17T19:20:18.730Z\",\n        \"updatedBy\": \"User Register\"\n    },\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "201 - Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Bhakti\",\r\n    \"lastName\": \"Mega Buana\",\r\n    \"username\": \"bhaks3938\",\r\n    \"email\": \"bhaktibuana19@gmail.com\",\r\n    \"password\": \"1234567890\",\r\n    \"encrypted\": false,\r\n    \"subscriptionCode\": \"basic\",\r\n    \"cardholderName\": \"Bhakti Mega Buana\",\r\n    \"cardNumber\": \"4666312452346799\",\r\n    \"cardCCV\": \"435\",\r\n    \"cardExpiration\": \"06/28\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

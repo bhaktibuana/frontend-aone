@@ -10,8 +10,16 @@ import { Rule } from "ant-design-vue/es/form";
 
 const props = defineProps({
   formData: {
-    types: Object as PropType<ICredentialsFormData>,
+    type: Object as PropType<ICredentialsFormData>,
     default: {} as ICredentialsFormData,
+  },
+  buttonLabel: {
+    type: String,
+    default: "Register",
+  },
+  loading: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -73,7 +81,8 @@ const validatePasswordConfirmation = async (
       <base-button
         form="registerCredentialsForm"
         htmlType="submit"
-        label="Register"
+        :label="buttonLabel"
+        :loading="loading"
       />
     </div>
   </base-form>

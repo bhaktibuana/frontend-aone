@@ -11,12 +11,14 @@
   "dependencies": {
     "ant-design-vue": "4.x",
     "axios": "^1.6.2",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
     "pinia": "^2.1.7",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.2.1",
     "@types/node": "^20.9.2",
     "@vitejs/plugin-vue": "^4.5.0",
     "sass": "^1.69.5",

@@ -122,3 +122,15 @@ input[type="number"] {
 .ant-form-item .ant-form-item-label > label {
   height: auto !important;
 }
+
+.ant-menu-item,
+.ant-notification,
+.ant-notification-message,
+.header {
+  color: rgba(0, 0, 0, 0.88) !important;
+}
+
+.ant-notification-notice-message {
+  color: rgba(0, 0, 0, 0.88) !important;
+  font-weight: bold;
+}

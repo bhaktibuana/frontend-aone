@@ -1,7 +1,7 @@
 export interface IChoosePlanFormData {
-  membershipKey: string;
+  subscriptionCode: string;
   cardholderName?: string;
   cardNumber?: string;
   cardCCV?: string;
-  cardExpireDate?: string;
+  cardExpiration?: string;
 }
