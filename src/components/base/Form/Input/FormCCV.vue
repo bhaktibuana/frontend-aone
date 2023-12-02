@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { PropType, ref, watch } from "vue";
-
-import { TValidateStatus } from "@/types";
+import { ref, watch } from "vue";
 
 import { tokenProperties } from "@/utils/constants/tokenProperties";
 
@@ -18,25 +16,13 @@ const props = defineProps({
     type: Number,
     default: tokenProperties.defaultFontSize,
   },
-  addonBefore: {
-    type: String,
-    default: null,
-  },
   value: {
-    type: [String, Number],
-    default: "",
-  },
-  type: {
     type: String,
-    default: "text",
+    default: "",
   },
   placeholder: {
     type: String,
     default: "",
-  },
-  suffixTitle: {
-    type: String,
-    default: null,
   },
   disabled: {
     type: Boolean,
@@ -50,43 +36,38 @@ const props = defineProps({
     type: Array,
     default: [],
   },
-  hasFeedback: {
-    type: Boolean,
-    default: false,
-  },
-  validateStatus: {
-    type: [String, undefined] as PropType<TValidateStatus>,
-    default: undefined,
-  },
 });
 
 const emit = defineEmits(["update:value"]);
 
-const internalValue = ref<string | number | undefined>(props.value);
+const internalValue = ref<string>(props.value);
 
 const updateValue = (event: { target: HTMLInputElement }): void => {
-  const newValue =
-    event.target.value === ""
-      ? event.target.value
-      : parseFloat(event.target.value);
-  internalValue.value = event.target.value;
-  emit("update:value", props.type === "number" ? newValue : event.target.value);
+  const formattedNumber = cardNumberFormat(event.target.value);
+  const rawValue = formattedNumber.split(" ").join("");
+
+  internalValue.value = formattedNumber;
+  emit("update:value", rawValue);
 };
 
-const disableWheel = (event: MouseEvent): void => {
-  event.preventDefault();
-};
+const onKeypress = (event: KeyboardEvent): void => {
+  const keyCode = event.keyCode || event.which;
 
-const handleKeyPress = (event: KeyboardEvent): void => {
-  if (props.type === "number" && !/^\d*\,?\d*$/.test(event.key)) {
+  if (!(keyCode >= 48 && keyCode <= 57) && keyCode !== 8) {
     event.preventDefault();
   }
+};
+
+const cardNumberFormat = (value: string): string => {
+  const numericInput = value.replace(/\D/g, "");
+
+  return numericInput.slice(0, 3);
 };
 
 watch(
   () => props.value,
   (newValue) => {
-    internalValue.value = newValue;
+    internalValue.value = cardNumberFormat(newValue);
   }
 );
 </script>
@@ -96,8 +77,6 @@ watch(
     :label="label"
     :name="name"
     class="mb-0"
-    :has-feedback="hasFeedback"
-    :validate-status="hasFeedback ? validateStatus : undefined"
     :rules="[
       {
         required: required,
@@ -120,13 +99,10 @@ watch(
       <a-input
         :value="internalValue"
         @input="updateValue"
-        :addonBefore="addonBefore"
-        :type="type"
+        type="text"
         :placeholder="placeholder"
-        :suffix="suffixTitle"
         :disabled="disabled"
-        @wheel="disableWheel"
-        @keypress="handleKeyPress"
+        @keypress="onKeypress"
       />
     </a-config-provider>
   </a-form-item>

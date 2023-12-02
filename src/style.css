@@ -117,4 +117,5 @@ input[type="number"] {
 
 .ant-form-item .ant-form-item-label {
   text-align: start;
+  padding: 0;
 }

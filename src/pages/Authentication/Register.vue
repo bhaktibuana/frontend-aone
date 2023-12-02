@@ -9,10 +9,16 @@ import { aoneLogo } from "@/assets/images";
 import BaseCard from "@/components/base/Card/Card.vue";
 import BaseImage from "@/components/base/Image/Image.vue";
 import WindowSize from "@/components/HOC/WindowSize.vue";
+import ChoosePlan from "@/components/pages/Authentication/Register/ChoosePlan.vue";
 import RegisterAccount from "@/components/pages/Authentication/Register/RegisterAccount.vue";
 import RegisterStepper from "@/components/pages/Authentication/Register/RegisterStepper.vue";
 
-import { IStepsItem, IRegisterAccountFormData, TValidateStatus } from "@/types";
+import {
+  IStepsItem,
+  IRegisterAccountFormData,
+  TValidateStatus,
+  IChoosePlanFormData,
+} from "@/types";
 import { ICheckUsername } from "@/types/apis/Authentication/queries/ICheckUsernameQuery";
 import { ICheckEmail } from "@/types/apis/Authentication/queries/ICheckEmailQuery";
 
@@ -41,21 +47,13 @@ const stepList = reactive<IStepsItem[]>([
   },
 ]);
 
-const registerAccountFormData = reactive<IRegisterAccountFormData>({
-  firstName: "",
-  lastName: "",
-  username: "",
-  email: "",
-});
+const registerAccountFormData = reactive<IRegisterAccountFormData>(
+  {} as IRegisterAccountFormData
+);
 
-const handleUpdateRegisterAccountFormData = (
-  values: IRegisterAccountFormData
-): void => {
-  registerAccountFormData.firstName = values.firstName;
-  registerAccountFormData.lastName = values.lastName;
-  registerAccountFormData.username = values.username;
-  registerAccountFormData.email = values.email;
-};
+const choosePlanFormData = reactive<IChoosePlanFormData>(
+  {} as IChoosePlanFormData
+);
 
 const hanldeUpdateCurrentStep = (index: number): void => {
   if (currentStep.value === index) return;
@@ -105,6 +103,22 @@ const handleCheckEmail = async (params: ICheckEmail): Promise<void> => {
   }
 };
 
+const onFinishSection = () => {
+  currentStep.value += 1;
+  console.log(registerAccountFormData);
+  console.log(choosePlanFormData);
+};
+
+const handleStepOnValueChange = () => {
+  stepList.forEach((_, index) => {
+    if (index === currentStep.value) {
+      stepList[index].title = "In Progress";
+    } else if (index > currentStep.value) {
+      stepList[index].title = "Waiting";
+    }
+  });
+};
+
 watch(currentStep, (newValue) => {
   handleChangeStepList(newValue);
 });
@@ -149,6 +163,28 @@ watch(isOnCheckEmail, (newValue) => {
   if (newValue) emailState.value = "validating";
 });
 
+watch(
+  () => registerAccountFormData,
+  () => {
+    handleStepOnValueChange();
+  },
+  { deep: true }
+);
+
+watch(
+  () => choosePlanFormData,
+  (newValue) => {
+    handleStepOnValueChange();
+    if (newValue.membershipKey === "basic") {
+      choosePlanFormData.cardholderName = undefined;
+      choosePlanFormData.cardNumber = undefined;
+      choosePlanFormData.cardCCV = undefined;
+      choosePlanFormData.cardExpireDate = undefined;
+    }
+  },
+  { deep: true }
+);
+
 onMounted(() => {
   handleChangeStepList(currentStep.value);
 });
@@ -179,7 +215,13 @@ onMounted(() => {
             :form-data="registerAccountFormData"
             :usernameState="usernameState"
             :emailState="emailState"
-            @update-formData="handleUpdateRegisterAccountFormData"
+            @on-finish-register-account="onFinishSection"
+          />
+
+          <choose-plan
+            v-if="currentStep === 1"
+            :form-data="choosePlanFormData"
+            @on-finish-choose-plan="onFinishSection"
           />
 
           <span class="login-info-text">
@@ -215,7 +257,7 @@ onMounted(() => {
 }
 
 .logo-image-wrapper {
-  max-width: 195px;
+  max-width: $size-195;
   height: auto;
   object-fit: contain;
 }

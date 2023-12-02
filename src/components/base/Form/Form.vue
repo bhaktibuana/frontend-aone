@@ -36,6 +36,7 @@ const onFinishFailed = (): void => {
       autocomplete="off"
       @finish="onFinish"
       @finish-failed="onFinishFailed"
+      novalidate
     >
       <a-config-provider
         :theme="{

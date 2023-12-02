@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType, reactive, ref, watch } from "vue";
+import { PropType, ref } from "vue";
 import { Rule } from "ant-design-vue/es/form";
 
 import BaseButton from "@/components/base/Button/Button.vue";
@@ -7,17 +7,11 @@ import BaseForm from "@/components/base/Form/Form.vue";
 import BaseFormInput from "@/components/base/Form/Input/FormInput.vue";
 
 import { IRegisterAccountFormData, TValidateStatus } from "@/types";
-import { computed } from "@vue/reactivity";
 
 const props = defineProps({
   formData: {
     type: Object as PropType<IRegisterAccountFormData>,
-    default: {
-      firstName: "",
-      lastName: "",
-      username: "",
-      email: "",
-    },
+    default: {} as IRegisterAccountFormData,
   },
   usernameState: {
     type: [String, undefined] as PropType<TValidateStatus>,
@@ -29,20 +23,9 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["update-formData"]);
+const emit = defineEmits(["onFinishRegisterAccount"]);
 
 const emailValidateStatus = ref<boolean>(false);
-
-const internalFormData = reactive<IRegisterAccountFormData>(props.formData);
-
-const isFormDataChanged = computed<IRegisterAccountFormData>({
-  get() {
-    return props.formData;
-  },
-  set(value) {
-    emit("update-formData", value);
-  },
-});
 
 const handleFinishForm = (isError: boolean, values: Object): void => {
   if (
@@ -50,7 +33,7 @@ const handleFinishForm = (isError: boolean, values: Object): void => {
     props.usernameState === "success" &&
     props.emailState === "success"
   )
-    console.log(values);
+    emit("onFinishRegisterAccount", values);
 };
 
 const handleValidateEmail = async (
@@ -68,27 +51,19 @@ const handleValidateEmail = async (
     return Promise.resolve();
   }
 };
-
-watch(
-  internalFormData,
-  (newValue) => {
-    isFormDataChanged.value = newValue;
-  },
-  { deep: true }
-);
 </script>
 
 <template>
   <base-form
     id="registerAccountForm"
-    :form-data="internalFormData"
+    :form-data="formData"
     @on-form-finish-action="handleFinishForm"
   >
     <base-form-input
       label="First Name"
       name="firstName"
       placeholder="Insert Your First Name"
-      v-model:value="internalFormData.firstName"
+      v-model:value="formData.firstName"
       required
     />
 
@@ -96,7 +71,7 @@ watch(
       label="Last Name"
       name="lastName"
       placeholder="Insert Your Last Name"
-      v-model:value="internalFormData.lastName"
+      v-model:value="formData.lastName"
       required
     />
 
@@ -104,7 +79,7 @@ watch(
       label="Username"
       name="username"
       placeholder="Insert Your Username"
-      v-model:value="internalFormData.username"
+      v-model:value="formData.username"
       hasFeedback
       :validate-status="usernameState"
       required
@@ -114,7 +89,7 @@ watch(
       label="Email"
       name="email"
       placeholder="Insert Your Email"
-      v-model:value="internalFormData.email"
+      v-model:value="formData.email"
       hasFeedback
       :validate-status="emailValidateStatus ? emailState : undefined"
       :rules="[
