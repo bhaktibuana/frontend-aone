@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import { Rule } from "ant-design-vue/es/form";
 
 import { tokenProperties } from "@/utils/constants/tokenProperties";

@@ -1,4 +1,4 @@
-import * as CryptoJS from "crypto-js";
+import CryptoJS from "crypto-js";
 
 export const debounce = (fn: Function, ms: number) => {
   let timeoutId: ReturnType<typeof setTimeout>;
