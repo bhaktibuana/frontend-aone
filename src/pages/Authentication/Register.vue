@@ -12,17 +12,19 @@ import WindowSize from "@/components/HOC/WindowSize.vue";
 import ChoosePlan from "@/components/pages/Authentication/Register/ChoosePlan.vue";
 import RegisterAccount from "@/components/pages/Authentication/Register/RegisterAccount.vue";
 import RegisterStepper from "@/components/pages/Authentication/Register/RegisterStepper.vue";
+import RegisterCredentials from "@/components/pages/Authentication/Register/Credentials.vue";
 
+import { debounce } from "@/utils/functions";
+
+import { ICheckUsername } from "@/types/apis/Authentication/queries/ICheckUsernameQuery";
+import { ICheckEmail } from "@/types/apis/Authentication/queries/ICheckEmailQuery";
 import {
   IStepsItem,
   IRegisterAccountFormData,
   TValidateStatus,
   IChoosePlanFormData,
+  ICredentialsFormData,
 } from "@/types";
-import { ICheckUsername } from "@/types/apis/Authentication/queries/ICheckUsernameQuery";
-import { ICheckEmail } from "@/types/apis/Authentication/queries/ICheckEmailQuery";
-
-import { debounce } from "@/utils/functions";
 
 const router = useRouter();
 
@@ -53,6 +55,10 @@ const registerAccountFormData = reactive<IRegisterAccountFormData>(
 
 const choosePlanFormData = reactive<IChoosePlanFormData>(
   {} as IChoosePlanFormData
+);
+
+const credentialsFormData = reactive<ICredentialsFormData>(
+  {} as ICredentialsFormData
 );
 
 const hanldeUpdateCurrentStep = (index: number): void => {
@@ -185,6 +191,13 @@ watch(
   { deep: true }
 );
 
+watch(
+  () => credentialsFormData.password,
+  () => {
+    credentialsFormData.confirmPassword = undefined as never as string;
+  }
+);
+
 onMounted(() => {
   handleChangeStepList(currentStep.value);
 });
@@ -219,9 +232,14 @@ onMounted(() => {
           />
 
           <choose-plan
-            v-if="currentStep === 1"
+            v-else-if="currentStep === 1"
             :form-data="choosePlanFormData"
             @on-finish-choose-plan="onFinishSection"
+          />
+
+          <register-credentials
+            v-else-if="currentStep === 2"
+            :form-data="credentialsFormData"
           />
 
           <span class="login-info-text">

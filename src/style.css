@@ -117,5 +117,8 @@ input[type="number"] {
 
 .ant-form-item .ant-form-item-label {
   text-align: start;
-  padding: 0;
+}
+
+.ant-form-item .ant-form-item-label > label {
+  height: auto !important;
 }
