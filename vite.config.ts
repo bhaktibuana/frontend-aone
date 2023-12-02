@@ -21,7 +21,7 @@ export default defineConfig({
           let prepends = "";
           prepends += `@import "./src/assets/styles/colors.scss";`;
           prepends += `@import "./src/assets/styles/spacer.scss";`;
-          // prepends += `@import "./src/assets/styles/screen-width.scss";`;
+          prepends += `@import "./src/assets/styles/screen-width.scss";`;
           prepends += source;
 
           return prepends;
