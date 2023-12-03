@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Auth",
+			"name": "Register",
 			"item": [
 				{
 					"name": "Register",
@@ -48,7 +48,7 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "{{x_access_token}}",
+										"value": "•••••••",
 										"type": "text"
 									}
 								],
@@ -62,11 +62,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}{{api_route}}/auth/register",
+									"raw": "http://localhost:3000/api/auth/register",
+									"protocol": "http",
 									"host": [
-										"{{base_url}}{{api_route}}"
+										"localhost"
 									],
+									"port": "3000",
 									"path": [
+										"api",
 										"auth",
 										"register"
 									]
@@ -231,12 +234,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}{{api_route}}/auth/checkEmail?email=bhaktibuana@gmail.com",
+							"raw": "{{base_url}}{{api_route}}/auth/register/checkEmail?email=bhaktibuana@gmail.com",
 							"host": [
 								"{{base_url}}{{api_route}}"
 							],
 							"path": [
 								"auth",
+								"register",
 								"checkEmail"
 							],
 							"query": [
@@ -255,17 +259,21 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "{{x_access_token}}",
+										"value": "•••••••",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}{{api_route}}/auth/checkEmail?email=bhaktibuana@gmail.com",
+									"raw": "http://localhost:3000/api/auth/register/checkEmail?email=bhaktibuana@gmail.com",
+									"protocol": "http",
 									"host": [
-										"{{base_url}}{{api_route}}"
+										"localhost"
 									],
+									"port": "3000",
 									"path": [
+										"api",
 										"auth",
+										"register",
 										"checkEmail"
 									],
 									"query": [
@@ -301,12 +309,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}{{api_route}}/auth/checkEmail?email=bhaktibuana19@gmail.com",
+									"raw": "{{base_url}}{{api_route}}/auth/register/checkEmail?email=bhaktibuana19@gmail.com",
 									"host": [
 										"{{base_url}}{{api_route}}"
 									],
 									"path": [
 										"auth",
+										"register",
 										"checkEmail"
 									],
 									"query": [
@@ -344,12 +353,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}{{api_route}}/auth/checkUsername?username=bhaks3938",
+							"raw": "{{base_url}}{{api_route}}/auth/register/checkUsername?username=bhaks3938",
 							"host": [
 								"{{base_url}}{{api_route}}"
 							],
 							"path": [
 								"auth",
+								"register",
 								"checkUsername"
 							],
 							"query": [
@@ -368,17 +378,21 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "{{x_access_token}}",
+										"value": "•••••••",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}{{api_route}}/auth/checkUsername?username=bhaks3938",
+									"raw": "http://localhost:3000/api/auth/register/checkUsername?username=bhaks3938",
+									"protocol": "http",
 									"host": [
-										"{{base_url}}{{api_route}}"
+										"localhost"
 									],
+									"port": "3000",
 									"path": [
+										"api",
 										"auth",
+										"register",
 										"checkUsername"
 									],
 									"query": [
@@ -414,12 +428,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}{{api_route}}/auth/checkUsername?username=bhaktibuana",
+									"raw": "{{base_url}}{{api_route}}/auth/register/checkUsername?username=bhaktibuana",
 									"host": [
 										"{{base_url}}{{api_route}}"
 									],
 									"path": [
 										"auth",
+										"register",
 										"checkUsername"
 									],
 									"query": [
@@ -442,6 +457,168 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Username is available\",\n    \"status\": true,\n    \"statusCode\": 200,\n    \"data\": true,\n    \"pagination\": {}\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Email Verificaiton",
+			"item": [
+				{
+					"name": "Verify Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{x_access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}{{api_route}}/auth/emailVerification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTcwMTUzOTU1OX0.VY0nnBCulMZjBHl2lmC-Od7GoVMwoxS2-9zq12LxEUg",
+							"host": [
+								"{{base_url}}{{api_route}}"
+							],
+							"path": [
+								"auth",
+								"emailVerification"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTcwMTUzOTU1OX0.VY0nnBCulMZjBHl2lmC-Od7GoVMwoxS2-9zq12LxEUg"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "401 - Verify Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "•••••••",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/auth/emailVerification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAxNTk1MjY1fQ.R3vx7ISOgBx0DSyjuuOIVLBnpllqA9Y2Y3ODEpezXZA",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"emailVerification"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAxNTk1MjY1fQ.R3vx7ISOgBx0DSyjuuOIVLBnpllqA9Y2Y3ODEpezXZA"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid Token\",\n    \"status\": false,\n    \"statusCode\": 401,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "400 - Verify Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/emailVerification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAxNTk1MjY1fQ.R3vx7ISOgBx0DSyjuuOIVLBnpllqA9Y2Y3ODEpezXZA",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"emailVerification"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAxNTk1MjY1fQ.R3vx7ISOgBx0DSyjuuOIVLBnpllqA9Y2Y3ODEpezXZA"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Failed to verify your account\",\n    \"status\": false,\n    \"statusCode\": 400,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "200 - Verify Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/emailVerification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNzAxNTk1NTEwfQ.MkhmfYPUm8zAvI6OYle3s4X2SEA-zs8TTApI0nODqF0",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"emailVerification"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNzAxNTk1NTEwfQ.MkhmfYPUm8zAvI6OYle3s4X2SEA-zs8TTApI0nODqF0"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Your account is verified\",\n    \"status\": true,\n    \"statusCode\": 200,\n    \"data\": [\n        1\n    ],\n    \"pagination\": {}\n}"
 						}
 					]
 				}

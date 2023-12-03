@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import { AuthenticationRoutes } from "@/routers/Authentication";
 
-const LandingPage = () => import("@/pages/base/LandingPage.vue");
+import LandingPage from "@/pages/base/LandingPage.vue";
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -11,7 +11,7 @@ export const router = createRouter({
     {
       path: "/",
       component: LandingPage,
-      name: "Landing Page",
+      name: "LandingPage",
     },
     { path: "/:pathMatch(.*)*", redirect: "/" },
   ],
