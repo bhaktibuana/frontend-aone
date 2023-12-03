@@ -4,7 +4,7 @@ import { useRouter } from "vue-router";
 import { notification } from "ant-design-vue";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { APIAuthentication } from "@/apis/Authentication";
+import { APIAuthentication } from "@/apis/Authentication/Register";
 
 import { aoneLogo } from "@/assets/images";
 

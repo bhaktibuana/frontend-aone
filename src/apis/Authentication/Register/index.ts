@@ -4,7 +4,7 @@ import { ICheckUsername } from "@/types/apis/Authentication/queries/ICheckUserna
 import { ICheckEmail } from "@/types/apis/Authentication/queries/ICheckEmailQuery";
 import { IRegisterFormData } from "@/types";
 
-const basePath = "/api/auth";
+const basePath = "/api/auth/register";
 
 const checkUsername = (params: ICheckUsername) => {
   const url = `${basePath}/checkUsername`;
@@ -17,7 +17,7 @@ const checkEmail = (params: ICheckEmail) => {
 };
 
 const register = (params: IRegisterFormData["data"]) => {
-  const url = `${basePath}/register`;
+  const url = `${basePath}`;
   return client.post(url, params);
 };
 

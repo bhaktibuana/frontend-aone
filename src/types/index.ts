@@ -5,3 +5,4 @@ export type { IChoosePlanFormData } from "@/types/pages/Authentication/Register/
 export type { IRadioButtonOptions } from "@/types/components/base/Form/Radio/FormRadio/IRadioButtonOptions.type";
 export type { ICredentialsFormData } from "@/types/pages/Authentication/Register/ICredentialsFormData.type";
 export type { IRegisterFormData } from "@/types/pages/Authentication/Register/IRegisterFormData.type";
+export type { IVerificationData } from "@/types/pages/Authentication/VerifyAccount/IVerificationData.type";
