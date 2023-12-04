@@ -21,7 +21,7 @@ const register = (params: IRegisterFormData["data"]) => {
   return client.post(url, params);
 };
 
-export const APIAuthentication = {
+export const APIRegister = {
   checkUsername,
   checkEmail,
   register,

@@ -4,7 +4,7 @@ import { useRouter } from "vue-router";
 import { notification } from "ant-design-vue";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { APIAuthentication } from "@/apis/Authentication/Register";
+import { APIRegister } from "@/apis/Authentication/Register";
 
 import { aoneLogo } from "@/assets/images";
 
@@ -103,7 +103,7 @@ const handleCheckUsername = async (params: ICheckUsername): Promise<void> => {
   isOnCheckUsername.value = true;
 
   try {
-    await APIAuthentication.checkUsername(params);
+    await APIRegister.checkUsername(params);
     usernameState.value = "success";
   } catch (error) {
     usernameState.value = "error";
@@ -116,7 +116,7 @@ const handleCheckEmail = async (params: ICheckEmail): Promise<void> => {
   isOnCheckEmail.value = true;
 
   try {
-    await APIAuthentication.checkEmail(params);
+    await APIRegister.checkEmail(params);
     emailState.value = "success";
   } catch (error) {
     emailState.value = "error";
@@ -153,8 +153,10 @@ const handleFinishAllForm = (): void => {
 const handleRegisterAction = async (): Promise<void> => {
   formData.loading = true;
   try {
-    formData.data.password = hashPassword(formData.data.password);
-    await APIAuthentication.register(formData.data);
+    await APIRegister.register({
+      ...formData.data,
+      password: hashPassword(formData.data.password),
+    });
     currentStep.value = 3;
   } catch (error: unknown | AxiosError) {
     const err = error as AxiosError;

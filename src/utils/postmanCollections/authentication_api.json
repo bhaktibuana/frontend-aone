@@ -234,7 +234,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}{{api_route}}/auth/register/checkEmail?email=bhaktibuana@gmail.com",
+							"raw": "{{base_url}}{{api_route}}/auth/register/checkEmail?email=bhaktibuana19@gmail.com",
 							"host": [
 								"{{base_url}}{{api_route}}"
 							],
@@ -246,7 +246,7 @@
 							"query": [
 								{
 									"key": "email",
-									"value": "bhaktibuana@gmail.com"
+									"value": "bhaktibuana19@gmail.com"
 								}
 							]
 						}
@@ -264,14 +264,11 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/api/auth/register/checkEmail?email=bhaktibuana@gmail.com",
-									"protocol": "http",
+									"raw": "{{base_url}}{{api_route}}/auth/register/checkEmail?email=bhaktibuana@gmail.com",
 									"host": [
-										"localhost"
+										"{{base_url}}{{api_route}}"
 									],
-									"port": "3000",
 									"path": [
-										"api",
 										"auth",
 										"register",
 										"checkEmail"
@@ -477,7 +474,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}{{api_route}}/auth/emailVerification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTcwMTUzOTU1OX0.VY0nnBCulMZjBHl2lmC-Od7GoVMwoxS2-9zq12LxEUg",
+							"raw": "{{base_url}}{{api_route}}/auth/emailVerification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNjE2NDcwfQ.izHBAK3tZmjNQW1p0Lkbn6L3HhoKzQM59VU0v6E9wfg",
 							"host": [
 								"{{base_url}}{{api_route}}"
 							],
@@ -488,7 +485,7 @@
 							"query": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTcwMTUzOTU1OX0.VY0nnBCulMZjBHl2lmC-Od7GoVMwoxS2-9zq12LxEUg"
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNjE2NDcwfQ.izHBAK3tZmjNQW1p0Lkbn6L3HhoKzQM59VU0v6E9wfg"
 								}
 							]
 						}
@@ -619,6 +616,414 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Your account is verified\",\n    \"status\": true,\n    \"statusCode\": 200,\n    \"data\": [\n        1\n    ],\n    \"pagination\": {}\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{x_access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usernameOrEmail\": \"bhaktibuana19@gmail.com\",\n    \"password\": \"1234567890\",\n    \"encrypted\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{api_route}}/auth/login",
+							"host": [
+								"{{base_url}}{{api_route}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "•••••••",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usernameOrEmail\": \"bhaktibuana19@gmail.com\",\n    \"password\": \"1234567890\",\n    \"encrypted\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success, OTP sent to registered email\",\n    \"status\": true,\n    \"statusCode\": 200,\n    \"data\": {\n        \"userId\": 2,\n        \"email\": \"bhaktibuana19@gmail.com\",\n        \"iat\": 1701621322,\n        \"exp\": 1701621442\n    },\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "400 - Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usernameOrEmail\": \"bhaktibuana19@gmail.com\",\n    \"password\": \"123456789220\",\n    \"encrypted\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/login",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Wrong email and password combination\",\n    \"status\": false,\n    \"statusCode\": 400,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "406 - Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"usernameOrEmail\": \"bhaktibuana19@gmail.com\",\n    \"password\": \"1234567890\",\n    \"encrypted\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/login",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Account is not verified\",\n    \"status\": false,\n    \"statusCode\": 406,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "Verify Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"if (jsonData && jsonData.data.accessToken) {",
+									"    pm.environment.set(\"access_token\", jsonData.data.accessToken);",
+									"    console.log(\"Access token saved to environment variable: \" + jsonData.data.accessToken);",
+									"} else {",
+									"    console.error(\"Access token not found in the response\");",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{x_access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": 2,\n    \"otp\": \"4602\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{api_route}}/auth/login/verifyLogin",
+							"host": [
+								"{{base_url}}{{api_route}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"verifyLogin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "401 - Verify Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "•••••••",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": 2,\n    \"otp\": \"8009\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/login/verifyLogin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"login",
+										"verifyLogin"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Wrong OTP\",\n    \"status\": false,\n    \"statusCode\": 401,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "200 - Verify Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": 2,\n    \"otp\": \"2996\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/login/verifyLogin",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"login",
+										"verifyLogin"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login success\",\n    \"status\": true,\n    \"statusCode\": 200,\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiQmhha3RpIiwibGFzdE5hbWUiOiJNZWdhIEJ1YW5hIiwidXNlcm5hbWUiOiJiaGFrczM5MzgiLCJlbWFpbCI6ImJoYWt0aWJ1YW5hMTlAZ21haWwuY29tIiwicm9sZUlkIjoyLCJpc1ZlcmlmaWVkIjp0cnVlLCJsb2dpbkxvZ0lkIjo0LCJpYXQiOjE3MDE2MjYxNzN9.sDTxLoBTkRc1SmSHvWAgAsLP9JWkqrJGtBarKSJXRpM\"\n    },\n    \"pagination\": {}\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Logout",
+			"item": [
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"if (jsonData && jsonData.statusCode === 200) {",
+									"    pm.environment.set(\"access_token\", null);",
+									"    console.log(\"Access token removed from environment variable\");",
+									"} else {",
+									"    console.error(\"Logout fialed. Failed to remove Access Token from environment variable\");",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{x_access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}{{api_route}}/auth/logout",
+							"host": [
+								"{{base_url}}{{api_route}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "•••••••",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/auth/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Logout success\",\n    \"status\": true,\n    \"statusCode\": 200,\n    \"data\": null,\n    \"pagination\": {}\n}"
 						}
 					]
 				}

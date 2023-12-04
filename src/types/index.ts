@@ -6,3 +6,4 @@ export type { IRadioButtonOptions } from "@/types/components/base/Form/Radio/For
 export type { ICredentialsFormData } from "@/types/pages/Authentication/Register/ICredentialsFormData.type";
 export type { IRegisterFormData } from "@/types/pages/Authentication/Register/IRegisterFormData.type";
 export type { IVerificationData } from "@/types/pages/Authentication/VerifyAccount/IVerificationData.type";
+export type { IFormData } from "@/types/pages/Authentication/Login/IFormData.type";
