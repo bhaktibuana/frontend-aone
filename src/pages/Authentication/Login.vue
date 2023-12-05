@@ -2,6 +2,7 @@
 import { reactive, ref, watch } from "vue";
 import { notification } from "ant-design-vue";
 import { AxiosError, AxiosResponse } from "axios";
+import { useRouter } from "vue-router";
 
 import { APILogin } from "@/apis/Authentication/Login";
 
@@ -14,11 +15,15 @@ import LoginForm from "@/components/pages/Authentication/Login/LoginForm.vue";
 import OtpSection from "@/components/pages/Authentication/Login/otpSeciton.vue";
 
 import { hashPassword } from "@/utils/functions";
+import { setCookie } from "@/utils/functions/cookie";
 
 import { I200_LoginResponseBody } from "@/types/apis/Authentication/response/I200_LoginResponseBody";
 import { I400_LoginResponseBody } from "@/types/apis/Authentication/response/I400_LoginResponseBody";
 import { I401_VerifyLoginResponseBody } from "@/types/apis/Authentication/response/I401_VerifyLoginResponseBody";
+import { I200_VerifyLoginResponseBody } from "@/types/apis/Authentication/response/I200_VerifyLoginResponseBody";
 import { ILoginFormData, IOtpFormData } from "@/types";
+
+const router = useRouter();
 
 const loginStep = ref<number>(0);
 
@@ -78,10 +83,20 @@ const handleVerifyOtp = async (): Promise<void> => {
   otpFormData.loading = true;
 
   try {
-    await APILogin.verifyLogin({
-      otp: otpFormData.otp,
-      userId: verifyData.userId,
+    const response: AxiosResponse<I200_VerifyLoginResponseBody> =
+      await APILogin.verifyLogin({
+        otp: otpFormData.otp,
+        userId: verifyData.userId,
+      });
+
+    notification["success"]({
+      message: "Success",
+      description: "Login Success",
+      placement: "bottom",
     });
+
+    setCookie("accessToken", response.data?.data?.accessToken, 7, "");
+    router.push({ name: "LandingPage" });
   } catch (error: unknown | AxiosError) {
     otpFormData.isOtpWrong = true;
     const err = error as AxiosError;
