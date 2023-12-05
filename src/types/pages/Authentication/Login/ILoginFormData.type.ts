@@ -1,6 +1,6 @@
 import { ILogin } from "@/types/apis/Authentication/request/ILoginRequest";
 
-export interface IFormData {
+export interface ILoginFormData {
   loading: boolean;
   data: ILogin;
 }

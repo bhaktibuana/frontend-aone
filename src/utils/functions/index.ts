@@ -12,3 +12,15 @@ export const hashPassword = (password: string): string => {
   const salt = "p@5s.@0n3";
   return CryptoJS.HmacSHA256(password, salt).toString(CryptoJS.enc.Hex);
 };
+
+export const hideEmail = (email: string): string => {
+  const mailStrLen = email.split("@")[0].length;
+  let regex = /(.{2})(.*)(.{2})(?=@)/;
+  if (mailStrLen <= 6) regex = /(.{1})(.*)(.{1})(?=@)/;
+  return email.replace(regex, (_x, y, z, e) => {
+    for (let i = 0; i < z.length; i++) {
+      y += "*";
+    }
+    return y + e;
+  });
+};

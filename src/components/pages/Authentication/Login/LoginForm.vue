@@ -7,12 +7,12 @@ import BaseFormInput from "@/components/base/Form/Input/FormInput.vue";
 import BaseFormInputPassword from "@/components/base/Form/Input/FormInputPassword.vue";
 import BaseButton from "@/components/base/Button/Button.vue";
 
-import { IFormData } from "@/types";
+import { ILoginFormData } from "@/types";
 
 defineProps({
   formData: {
-    type: Object as PropType<IFormData["data"]>,
-    default: {} as IFormData["data"],
+    type: Object as PropType<ILoginFormData["data"]>,
+    default: {} as ILoginFormData["data"],
   },
   loading: {
     type: Boolean,
@@ -24,7 +24,10 @@ const router = useRouter();
 
 const emit = defineEmits(["onFormFinishAction"]);
 
-const handleFormFinish = (isError: boolean, data: IFormData["data"]): void => {
+const handleFormFinish = (
+  isError: boolean,
+  data: ILoginFormData["data"]
+): void => {
   if (!isError) emit("onFormFinishAction", data);
 };
 
