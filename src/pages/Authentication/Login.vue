@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref, watch } from "vue";
+import { inject, reactive, ref, watch } from "vue";
 import { notification } from "ant-design-vue";
 import { AxiosError, AxiosResponse } from "axios";
 import { useRouter } from "vue-router";
@@ -8,7 +8,6 @@ import { APILogin } from "@/apis/Authentication/Login";
 
 import { aoneLogo } from "@/assets/images";
 
-import WindowSize from "@/components/HOC/WindowSize.vue";
 import BaseCard from "@/components/base/Card/Card.vue";
 import BaseImage from "@/components/base/Image/Image.vue";
 import LoginForm from "@/components/pages/Authentication/Login/LoginForm.vue";
@@ -24,6 +23,8 @@ import { I200_VerifyLoginResponseBody } from "@/types/apis/Authentication/respon
 import { ILoginFormData, IOtpFormData } from "@/types";
 
 const router = useRouter();
+
+const isMobileView = inject<boolean>("isMobileView", false);
 
 const loginStep = ref<number>(0);
 
@@ -134,37 +135,35 @@ watch(
 </script>
 
 <template>
-  <window-size v-slot="{ isMobileView }">
-    <div class="page-wrapper">
-      <base-card>
-        <div class="card-content-wrapper">
-          <div class="logo-image-wrapper">
-            <base-image
-              alt="aone"
-              :src="aoneLogo"
-              :height="isMobileView ? 40 : 58"
-              :width="isMobileView ? 132 : 195"
-            />
-          </div>
-
-          <login-form
-            v-if="loginStep === 0"
-            :formData="formData.data"
-            :loading="formData.loading"
-            @on-form-finish-action="handleLogin"
-          />
-
-          <otp-section
-            v-else-if="loginStep === 1"
-            :data="verifyData"
-            :form-data="otpFormData"
-            @on-otp-verify-action="handleVerifyOtp"
-            @on-back-to-login-action="handleBackToLogin"
+  <div class="page-wrapper">
+    <base-card>
+      <div class="card-content-wrapper">
+        <div class="logo-image-wrapper">
+          <base-image
+            alt="aone"
+            :src="aoneLogo"
+            :height="isMobileView ? 40 : 58"
+            :width="isMobileView ? 132 : 195"
           />
         </div>
-      </base-card>
-    </div>
-  </window-size>
+
+        <login-form
+          v-if="loginStep === 0"
+          :formData="formData.data"
+          :loading="formData.loading"
+          @on-form-finish-action="handleLogin"
+        />
+
+        <otp-section
+          v-else-if="loginStep === 1"
+          :data="verifyData"
+          :form-data="otpFormData"
+          @on-otp-verify-action="handleVerifyOtp"
+          @on-back-to-login-action="handleBackToLogin"
+        />
+      </div>
+    </base-card>
+  </div>
 </template>
 
 <style scoped lang="scss">

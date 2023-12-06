@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from "vue";
+import { inject, onMounted, reactive, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { notification } from "ant-design-vue";
 import { AxiosError, AxiosResponse } from "axios";
@@ -10,7 +10,6 @@ import { aoneLogo } from "@/assets/images";
 
 import BaseCard from "@/components/base/Card/Card.vue";
 import BaseImage from "@/components/base/Image/Image.vue";
-import WindowSize from "@/components/HOC/WindowSize.vue";
 import ChoosePlan from "@/components/pages/Authentication/Register/ChoosePlan.vue";
 import RegisterAccount from "@/components/pages/Authentication/Register/RegisterAccount.vue";
 import RegisterStepper from "@/components/pages/Authentication/Register/RegisterStepper.vue";
@@ -35,6 +34,8 @@ import {
 } from "@/types";
 
 const router = useRouter();
+
+const isMobileView = inject<boolean>("isMobileView", false);
 
 const currentStep = ref<number>(0);
 const isOnCheckUsername = ref<boolean>(false);
@@ -271,71 +272,69 @@ onMounted(() => {
 </script>
 
 <template>
-  <window-size v-slot="{ isMobileView }">
-    <div class="page-wrapper">
-      <base-card>
-        <div class="card-content-wrapper">
-          <div class="logo-image-wrapper">
-            <base-image
-              alt="aone"
-              :src="aoneLogo"
-              :height="isMobileView ? 40 : 58"
-              :width="isMobileView ? 132 : 195"
-            />
-          </div>
-
-          <register-stepper
-            v-if="currentStep !== 3"
-            :stepList="stepList"
-            :currentStep="currentStep"
-            @update-selectedIndex="hanldeUpdateCurrentStep"
+  <div class="page-wrapper">
+    <base-card>
+      <div class="card-content-wrapper">
+        <div class="logo-image-wrapper">
+          <base-image
+            alt="aone"
+            :src="aoneLogo"
+            :height="isMobileView ? 40 : 58"
+            :width="isMobileView ? 132 : 195"
           />
-
-          <register-account
-            v-if="currentStep === 0"
-            :form-data="registerAccountFormData"
-            :usernameState="usernameState"
-            :emailState="emailState"
-            @on-finish-register-account="onFinishSection"
-          />
-
-          <choose-plan
-            v-else-if="currentStep === 1"
-            :form-data="choosePlanFormData"
-            @on-finish-choose-plan="onFinishSection"
-          />
-
-          <register-credentials
-            v-else-if="currentStep === 2"
-            :form-data="credentialsFormData"
-            :button-label="registerButtonLabel"
-            :loading="formData.loading"
-            @on-finish-credentials="handleFinishAllForm"
-          />
-
-          <span v-if="currentStep !== 3" class="login-info-text">
-            Already have account?
-            <span class="login-action" @click="handleLogin"> Login Here </span>
-          </span>
-
-          <register-success
-            v-if="currentStep === 3"
-            :icon="mailIcon"
-            title="Account Registration Successful"
-            description="We have sent a verification link to your registered email. Check your email to verify your account"
-          />
-
-          <div
-            v-if="currentStep === 3"
-            class="button-wrapper"
-            @click="handleLogin"
-          >
-            <base-button label="Login" />
-          </div>
         </div>
-      </base-card>
-    </div>
-  </window-size>
+
+        <register-stepper
+          v-if="currentStep !== 3"
+          :stepList="stepList"
+          :currentStep="currentStep"
+          @update-selectedIndex="hanldeUpdateCurrentStep"
+        />
+
+        <register-account
+          v-if="currentStep === 0"
+          :form-data="registerAccountFormData"
+          :usernameState="usernameState"
+          :emailState="emailState"
+          @on-finish-register-account="onFinishSection"
+        />
+
+        <choose-plan
+          v-else-if="currentStep === 1"
+          :form-data="choosePlanFormData"
+          @on-finish-choose-plan="onFinishSection"
+        />
+
+        <register-credentials
+          v-else-if="currentStep === 2"
+          :form-data="credentialsFormData"
+          :button-label="registerButtonLabel"
+          :loading="formData.loading"
+          @on-finish-credentials="handleFinishAllForm"
+        />
+
+        <span v-if="currentStep !== 3" class="login-info-text">
+          Already have account?
+          <span class="login-action" @click="handleLogin"> Login Here </span>
+        </span>
+
+        <register-success
+          v-if="currentStep === 3"
+          :icon="mailIcon"
+          title="Account Registration Successful"
+          description="We have sent a verification link to your registered email. Check your email to verify your account"
+        />
+
+        <div
+          v-if="currentStep === 3"
+          class="button-wrapper"
+          @click="handleLogin"
+        >
+          <base-button label="Login" />
+        </div>
+      </div>
+    </base-card>
+  </div>
 </template>
 
 <style lang="scss" scoped>

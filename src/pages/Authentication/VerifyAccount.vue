@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive } from "vue";
+import { inject, onMounted, reactive } from "vue";
 import { useRoute } from "vue-router";
 import { AxiosError, AxiosResponse } from "axios";
 
@@ -7,7 +7,6 @@ import { APIVerifyEmail } from "@/apis/Authentication/EmailVerification";
 
 import { aoneLogo } from "@/assets/images";
 
-import WindowSize from "@/components/HOC/WindowSize.vue";
 import BaseCard from "@/components/base/Card/Card.vue";
 import BaseImage from "@/components/base/Image/Image.vue";
 import Verifying from "@/components/pages/Authentication/VerifyAccount/Verifying.vue";
@@ -18,6 +17,8 @@ import { IVerificationData } from "@/types";
 
 const route = useRoute();
 const searchParams = route.query;
+
+const isMobileView = inject<boolean>("isMobileView", false);
 
 const verificationData = reactive<IVerificationData>({
   isVerifying: true,
@@ -47,29 +48,27 @@ onMounted(() => {
 </script>
 
 <template>
-  <window-size v-slot="{ isMobileView }">
-    <div class="page-wrapper">
-      <base-card>
-        <div class="card-content-wrapper">
-          <div class="logo-image-wrapper">
-            <base-image
-              alt="aone"
-              :src="aoneLogo"
-              :height="isMobileView ? 40 : 58"
-              :width="isMobileView ? 132 : 195"
-            />
-          </div>
-
-          <verifying v-if="verificationData.isVerifying" />
-          <verification-result
-            v-else
-            :status="verificationData.status"
-            :message="verificationData.message"
+  <div class="page-wrapper">
+    <base-card>
+      <div class="card-content-wrapper">
+        <div class="logo-image-wrapper">
+          <base-image
+            alt="aone"
+            :src="aoneLogo"
+            :height="isMobileView ? 40 : 58"
+            :width="isMobileView ? 132 : 195"
           />
         </div>
-      </base-card>
-    </div>
-  </window-size>
+
+        <verifying v-if="verificationData.isVerifying" />
+        <verification-result
+          v-else
+          :status="verificationData.status"
+          :message="verificationData.message"
+        />
+      </div>
+    </base-card>
+  </div>
 </template>
 
 <style scoped lang="scss">
