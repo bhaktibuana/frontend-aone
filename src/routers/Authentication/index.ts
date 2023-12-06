@@ -4,13 +4,18 @@ import Register from "@/pages/Authentication/Register.vue";
 import VerifyAccount from "@/pages/Authentication/VerifyAccount.vue";
 import Login from "@/pages/Authentication/Login.vue";
 
-export const AuthenticationRoutes = [
+import { TRoutes } from "@/types";
+
+export const AuthenticationRoutes: TRoutes = [
   {
     path: "/register",
     component: Register,
     name: "Register",
     meta: {
       layout: PublicAuthPageLayout,
+      isPrivatePage: false,
+      isAuthPage: true,
+      authorization: "GS",
     },
   },
   {
@@ -19,6 +24,9 @@ export const AuthenticationRoutes = [
     name: "VerifyAccount",
     meta: {
       layout: PublicAuthPageLayout,
+      isPrivatePage: false,
+      isAuthPage: true,
+      authorization: "GS",
     },
   },
   {
@@ -27,6 +35,9 @@ export const AuthenticationRoutes = [
     name: "Login",
     meta: {
       layout: PublicAuthPageLayout,
+      isPrivatePage: false,
+      isAuthPage: true,
+      authorization: "GS",
     },
   },
 ];

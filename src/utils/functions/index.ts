@@ -1,4 +1,7 @@
 import CryptoJS from "crypto-js";
+import { jwtDecode } from "jwt-decode";
+
+import { IGetUserData } from "@/types";
 
 export const debounce = (fn: Function, ms: number) => {
   let timeoutId: ReturnType<typeof setTimeout>;
@@ -23,4 +26,29 @@ export const hideEmail = (email: string): string => {
     }
     return y + e;
   });
+};
+
+export const getUserData = (accessToken: string): IGetUserData => {
+  try {
+    const decodedToken: IGetUserData["payload"] = jwtDecode(accessToken);
+    if (Date.now() > decodedToken.exp * 1000) {
+      return {
+        isExpired: true,
+        isInvalidToken: false,
+        payload: {} as IGetUserData["payload"],
+      };
+    } else {
+      return {
+        isExpired: false,
+        isInvalidToken: false,
+        payload: decodedToken,
+      };
+    }
+  } catch (error) {
+    return {
+      isExpired: false,
+      isInvalidToken: true,
+      payload: {} as IGetUserData["payload"],
+    };
+  }
 };
