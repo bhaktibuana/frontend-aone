@@ -87,5 +87,3 @@ const validatePasswordConfirmation = async (
     </div>
   </base-form>
 </template>
-
-<style scoped lang="scss"></style>

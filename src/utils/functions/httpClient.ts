@@ -13,7 +13,6 @@ const globalErrorHandler = async (error: AxiosError) => {
     const originalRequest = error.config;
 
     removeCookie("accessToken");
-    localStorage.clear();
     delete originalRequest?.headers.Authorization;
     history.pushState(null, "", "");
   }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, provide, ref } from "vue";
 
 const isMobileView = ref<boolean>(false);
 
@@ -19,6 +19,8 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", handleResizeWindow);
 });
+
+provide("isMobileView", isMobileView);
 </script>
 
 <template>

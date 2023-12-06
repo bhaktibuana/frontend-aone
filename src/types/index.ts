@@ -6,3 +6,8 @@ export type { IRadioButtonOptions } from "@/types/components/base/Form/Radio/For
 export type { ICredentialsFormData } from "@/types/pages/Authentication/Register/ICredentialsFormData.type";
 export type { IRegisterFormData } from "@/types/pages/Authentication/Register/IRegisterFormData.type";
 export type { IVerificationData } from "@/types/pages/Authentication/VerifyAccount/IVerificationData.type";
+export type { ILoginFormData } from "@/types/pages/Authentication/Login/ILoginFormData.type";
+export type { IOtpFormData } from "@/types/pages/Authentication/Login/IOtpFormData.type";
+export type { IMeta } from "@/types/routers/IMeta.type";
+export type { TRoutes } from "@/types/routers/TRoutes.type";
+export type { IGetUserData } from "@/types/utils/functions/IGetUserData.type";
