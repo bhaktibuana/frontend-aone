@@ -70,6 +70,7 @@ button:focus-visible {
 #app {
   max-width: 100vw;
   margin: 0 auto;
+  width: 100%;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -133,4 +134,32 @@ input[type="number"] {
 .ant-notification-notice-message {
   color: rgba(0, 0, 0, 0.88) !important;
   font-weight: bold;
+}
+
+.ant-modal .ant-modal-header {
+  padding: 0 24px 16px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  margin-bottom: 0 !important;
+}
+
+.ant-modal .ant-modal-footer {
+  margin-top: 0 !important;
+}
+
+.ant-modal .ant-modal-title {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.ant-modal .ant-modal-content {
+  padding: 16px 0;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.ant-btn-default.ant-btn-dangerous {
+  color: white;
+}
+
+.ant-btn-default.ant-btn-dangerous:hover {
+  color: white !important;
 }

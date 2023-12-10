@@ -11,3 +11,5 @@ export type { IOtpFormData } from "@/types/pages/Authentication/Login/IOtpFormDa
 export type { IMeta } from "@/types/routers/IMeta.type";
 export type { TRoutes } from "@/types/routers/TRoutes.type";
 export type { IGetUserData } from "@/types/utils/functions/IGetUserData.type";
+export type { IDropdownMenuList } from "@/types/components/base/Dropdown/IDropdownMenuList.type";
+export type { IScreenSize } from "@/types/components/HOC/WindowSize/IScreenSize.type";

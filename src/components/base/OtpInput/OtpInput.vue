@@ -139,13 +139,13 @@ onMounted(() => {
         transform: translateX(0);
       }
       25% {
-        transform: translateX(-5px);
+        transform: translateX(-$size-5);
       }
       50% {
-        transform: translateX(5px);
+        transform: translateX($size-5);
       }
       75% {
-        transform: translateX(-5px);
+        transform: translateX(-$size-5);
       }
       100% {
         transform: translateX(0);

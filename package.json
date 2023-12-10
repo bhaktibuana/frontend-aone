@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tabler/icons-vue": "^2.43.0",
     "ant-design-vue": "4.x",
     "axios": "^1.6.2",
     "crypto-js": "^4.2.0",

@@ -350,7 +350,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: $size-16;
-  width: 600px;
+  width: $size-600;
   align-items: center;
 
   @include breakpoint(md, max) {
