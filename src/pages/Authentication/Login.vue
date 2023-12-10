@@ -98,7 +98,7 @@ const handleVerifyOtp = async (): Promise<void> => {
 
     setCookie("accessToken", response.data?.data?.accessToken, 7, "");
     router.push({ path: "/dashboard" });
-    history.pushState(null, "", "");
+    router.go(0);
   } catch (error: unknown | AxiosError) {
     otpFormData.isOtpWrong = true;
     const err = error as AxiosError;

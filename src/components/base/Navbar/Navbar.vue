@@ -88,7 +88,7 @@ const handleLogout = async (): Promise<void> => {
     await APILogout.logout();
     removeCookie("accessToken");
     router.push({ name: "Login" });
-    history.pushState(null, "", "");
+    router.go(0)
   } catch (error) {
     notification["error"]({
       message: "Error",

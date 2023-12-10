@@ -1,7 +1,10 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { getCookie, removeCookie } from "@/utils/functions/cookie";
+import { useRouter } from "vue-router";
 
 const accessToken = getCookie("accessToken");
+
+const router = useRouter();
 
 const globalResponseHandler = (response: AxiosResponse) => response;
 
@@ -14,7 +17,7 @@ const globalErrorHandler = async (error: AxiosError) => {
 
     removeCookie("accessToken");
     delete originalRequest?.headers.Authorization;
-    history.pushState(null, "", "");
+    router.go(0);
   }
 
   return Promise.reject(error);

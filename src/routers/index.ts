@@ -67,7 +67,7 @@ router.beforeEach((to, _from, next) => {
     if (userData.isExpired || userData.isInvalidToken) {
       removeCookie("accessToken");
       next({ name: "Login" });
-      return history.pushState(null, "", "");
+      return router.go(0)
     } else {
       const userRole = userData.payload.Role.code;
 
