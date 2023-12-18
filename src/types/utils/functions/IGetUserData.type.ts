@@ -15,6 +15,23 @@ export interface IGetUserData {
       code: string;
       name: string;
     };
+    UserSubscription:
+      | [
+          {
+            id: number;
+            userId: number;
+            subscriptionId: number;
+            startDate: Date;
+            endDate: Date;
+            Subscription: {
+              id: number;
+              code: string;
+              name: string;
+              price: string;
+            };
+          }
+        ]
+      | [];
     iat: number;
     exp: number;
   };

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { colors } from "@/assets/styles/colors";
 defineProps({
   height: {
     type: Number,
@@ -39,12 +40,18 @@ defineProps({
     viewBox="0 0 320 180"
   >
     <g filter="url(#goo)">
-      <circle cy="90" cx="160" r="24" fill="#373160" class="circle"></circle>
       <circle
         cy="90"
         cx="160"
         r="24"
-        fill="#138ba9"
+        :fill="colors.darkPrimary"
+        class="circle"
+      ></circle>
+      <circle
+        cy="90"
+        cx="160"
+        r="24"
+        :fill="colors.primary"
         class="circle right"
       ></circle>
     </g>
@@ -62,11 +69,11 @@ defineProps({
 
 @keyframes move571 {
   25% {
-    transform: translateX(-32px);
+    transform: translateX(-$size-32);
   }
 
   75% {
-    transform: translateX(32px);
+    transform: translateX(-$size-32);
   }
 }
 </style>

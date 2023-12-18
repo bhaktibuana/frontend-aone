@@ -16,5 +16,7 @@ import WindowSize from "@/components/HOC/WindowSize.vue";
   max-width: 100vw;
   height: auto;
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 </style>

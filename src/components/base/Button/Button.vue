@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { PropType } from "vue";
+
 import { colors } from "@/assets/styles/colors";
 
 import { tokenProperties } from "@/utils/constants/tokenProperties";
+
+import BaseIcon from "@/components/base/Icon/Icon.vue";
 
 const props = defineProps({
   form: {
@@ -29,7 +33,7 @@ const props = defineProps({
     default: false,
   },
   type: {
-    type: String,
+    type: String as PropType<string | "primary" | "danger">,
     default: "primary",
   },
   icon: {
@@ -37,10 +41,6 @@ const props = defineProps({
     default: "",
   },
   loading: {
-    type: Boolean,
-    default: false,
-  },
-  danger: {
     type: Boolean,
     default: false,
   },
@@ -54,17 +54,17 @@ const getStylingValue = (property: string): string => {
   let value = "";
   switch (property) {
     case "colorBorder": {
-      if (props.danger) {
+      if (props.disabled) {
         value = colors.white;
-      } else if (props.disabled) {
-        value = colors.white;
+      } else if (props.type === "danger") {
+        value = colors.danger;
       } else {
         value = colors.primary;
       }
       break;
     }
     case "colorPrimary":
-      if (props.danger) {
+      if (props.type === "danger") {
         value = colors.white;
       } else if (props.type === "primary") {
         value = colors.white;
@@ -73,7 +73,7 @@ const getStylingValue = (property: string): string => {
       }
       break;
     case "colorBgContainer":
-      if (props.danger) {
+      if (props.type === "danger") {
         value = colors.danger;
       } else if (props.type === "primary") {
         value = colors.primary;
@@ -82,7 +82,7 @@ const getStylingValue = (property: string): string => {
       }
       break;
     case "colorText":
-      if (props.danger) {
+      if (props.type === "danger") {
         value = colors.white;
       } else if (props.type === "primary") {
         value = colors.white;
@@ -119,9 +119,9 @@ const getStylingValue = (property: string): string => {
       :size="size"
       :disabled="disabled"
       :loading="loading"
-      :danger="danger"
+      :danger="type === 'danger'"
     >
-      <!-- <base-icon v-if="icon" :icon-name="icon" /> -->
+      <base-icon v-if="icon" :name="icon" :stroke-width="2.5" color="" />
       {{ label }}
     </a-button>
   </a-config-provider>
@@ -135,6 +135,7 @@ const getStylingValue = (property: string): string => {
   align-items: center;
   justify-content: center;
   gap: $size-8;
+  font-weight: 700 !important;
 
   &.width-auto {
     width: auto;

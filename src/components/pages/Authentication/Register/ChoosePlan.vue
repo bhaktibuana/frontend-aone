@@ -168,7 +168,7 @@ h2.section-title {
   display: flex;
   flex-direction: column;
   gap: $size-4;
-  margin-top: 10px;
+  margin-top: $size-10;
 }
 
 .payment-wrapper {

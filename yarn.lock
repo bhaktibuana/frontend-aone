@@ -232,6 +232,18 @@
     core-js "^3.15.1"
     nanopop "^2.1.0"
 
+"@tabler/icons-vue@^2.43.0":
+  version "2.43.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons-vue/-/icons-vue-2.43.0.tgz#f92d363e75593e05e9e2253b80d6bf8ed4d49430"
+  integrity sha512-7OiZ4QsTnJ2BOeI8bJmDicHDMdDiuEItw/T7TVOnin/YJXiTSfTA+CE/sEERKLLrox+b3sd13qKEHkAYv9siEA==
+  dependencies:
+    "@tabler/icons" "2.43.0"
+
+"@tabler/icons@2.43.0":
+  version "2.43.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.43.0.tgz#f720db2b2fb93a85d6d153f65fe120c092e51aba"
+  integrity sha512-afToJMJj31Q9Put1/saemluLBvWhgzsF59QM/mJZZ7LLHW12ViumyQIwA31SRCH/HsYBEoRp2qHFt0QwIFWDFw==
+
 "@types/crypto-js@^4.2.1":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-4.2.1.tgz#480edd76991a63050cb88db1a8840758c55a7135"
