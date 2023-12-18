@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { reactive, ref, watch } from "vue";
 import { notification } from "ant-design-vue";
 import { AxiosError, AxiosResponse } from "axios";
 
@@ -10,11 +10,15 @@ import UserInfoCard from "@/components/pages/GeneralPrivate/Profile/UserInfoCard
 import ChangePasswordCard from "@/components/pages/GeneralPrivate/Profile/ChangePasswordCard.vue";
 
 import { getUserData, hashPassword } from "@/utils/functions";
-import { getCookie, setCookie } from "@/utils/functions/cookie";
+import { getCookie } from "@/utils/functions/cookie";
+
+import { useUserStore } from "@/store";
 
 import { IGetUserData, IUserInfoFormData, IPasswordFormData } from "@/types";
 import { I400_UpdateUserInfoResponseBody } from "@/types/apis/Authentication/response/I400_UpdateUserInfoResponseBody";
 import { I400_ChangePasswordResponseBody } from "@/types/apis/Authentication/response/I400_ChangePasswordResponseBody";
+
+const userStore = useUserStore();
 
 const userInfoFormLoading = ref<boolean>(false);
 
@@ -34,8 +38,7 @@ const updateUserInfo = async (data: IUserInfoFormData): Promise<void> => {
 
   try {
     await APIProfile.updateUserInfo(data);
-    const response = await APIProfile.myToken();
-    setCookie("accessToken", response.data?.data?.accessToken, 7, "");
+    await userStore.fetchData();
     notification["success"]({
       message: "Success",
       description: "Update user info success",
@@ -95,6 +98,14 @@ const handleChangePassword = async (): Promise<void> => {
     passwordFormData.loading = false;
   }
 };
+
+watch(
+  () => passwordFormData.data.newPassword,
+  () => {
+    passwordFormData.data.newPasswordConfirmation =
+      undefined as never as string;
+  }
+);
 </script>
 
 <template>

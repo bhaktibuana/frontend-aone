@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { PropType } from "vue";
+import { Rule } from "ant-design-vue/es/form";
 
 import BaseCardWithHeader from "@/components/base/Card/CardWithHeader.vue";
 import BaseForm from "@/components/base/Form/Form.vue";
@@ -9,7 +10,8 @@ import BaseButton from "@/components/base/Button/Button.vue";
 
 import { IChangePassword } from "@/types/apis/Authentication/request/IChangePasswordRequest";
 
-defineProps({
+
+const props = defineProps({
   formData: {
     type: Object as PropType<IChangePassword>,
     default: {} as IChangePassword,
@@ -24,6 +26,21 @@ const emit = defineEmits(["onFormFinishAction"]);
 
 const handleFormFinish = (isError: boolean, data: IChangePassword): void => {
   if (!isError) emit("onFormFinishAction", data);
+};
+
+const validatePasswordConfirmation = async (
+  _rule: Rule,
+  value: string
+): Promise<void> => {
+  if (value === "" || value === undefined) {
+    return Promise.reject("New Password Confirmation is required");
+  } else if (value.length < 8) {
+    return Promise.reject("New Password Confirmation length at least 8 characters");
+  } else if (value !== props.formData.newPassword) {
+    return Promise.reject("New Password Confirmation does not match");
+  } else {
+    return Promise.resolve();
+  }
 };
 </script>
 
@@ -41,6 +58,7 @@ const handleFormFinish = (isError: boolean, data: IChangePassword): void => {
           placeholder="Insert Your Old Password"
           v-model:value="formData.oldPassword"
           required
+          :rules="[{ min: 8, message: 'Old Password length at least 8 characters' }]"
         />
 
         <base-form-input-password
@@ -49,6 +67,7 @@ const handleFormFinish = (isError: boolean, data: IChangePassword): void => {
           placeholder="Insert Your New Password"
           v-model:value="formData.newPassword"
           required
+          :rules="[{ min: 8, message: 'New Password length at least 8 characters' }]"
         />
 
         <base-form-input-password
@@ -57,6 +76,13 @@ const handleFormFinish = (isError: boolean, data: IChangePassword): void => {
           placeholder="Insert New Password Confirmation"
           v-model:value="formData.newPasswordConfirmation"
           required
+          :rules="[
+        {
+          required: true,
+          validator: validatePasswordConfirmation,
+          trigger: 'change',
+        },
+      ]"
         />
       </base-form>
 

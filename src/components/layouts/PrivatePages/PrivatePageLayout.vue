@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 import WindowSize from "@/components/HOC/WindowSize.vue";
 import BaseSidebar from "@/components/base/Sidebar/Sidebar.vue";
 import BaseNavbar from "@/components/base/Navbar/Navbar.vue";
 
+import { useUserStore } from "@/store";
+
 import { IScreenSize } from "@/types";
+
+const userStore = useUserStore();
 
 const collapsed = ref<boolean>(false);
 const mobileViewState = ref<boolean>(false);
@@ -46,6 +50,10 @@ watch(
   },
   { immediate: true }
 );
+
+onMounted(async () => {
+  await userStore.fetchData();
+});
 </script>
 
 <template>

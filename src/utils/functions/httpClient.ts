@@ -1,6 +1,7 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { getCookie, removeCookie } from "@/utils/functions/cookie";
 import { useRouter } from "vue-router";
+
+import { getCookie, removeCookie } from "@/utils/functions/cookie";
 
 const accessToken = getCookie("accessToken");
 

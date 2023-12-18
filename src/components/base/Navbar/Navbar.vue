@@ -16,10 +16,12 @@ import BaseModal from "@/components/base/Modal/Modal.vue";
 import BaseButton from "@/components/base/Button/Button.vue";
 import BaseButtonOutline from "@/components/base/Button/ButtonOutline.vue";
 
-import { getUserData, parseNameLength } from "@/utils/functions";
-import { getCookie, removeCookie } from "@/utils/functions/cookie";
+import { parseNameLength } from "@/utils/functions";
+import { removeCookie } from "@/utils/functions/cookie";
 
-import { IDropdownMenuList, IGetUserData } from "@/types";
+import { useUserStore } from "@/store";
+
+import { IDropdownMenuList } from "@/types";
 
 const props = defineProps({
   collapsed: {
@@ -28,15 +30,13 @@ const props = defineProps({
   },
 });
 
+const userStore = useUserStore();
+
 const emit = defineEmits(["onCollapseAction"]);
 
 const router = useRouter();
 
 const isMobileView = inject<boolean>("isMobileView", false);
-
-const userData = reactive<IGetUserData>(
-  getUserData(getCookie("accessToken") as string)
-);
 
 const avatarDropdownList = reactive<IDropdownMenuList[]>([
   {
@@ -90,6 +90,8 @@ const handleLogout = async (): Promise<void> => {
   try {
     await APILogout.logout();
     removeCookie("accessToken");
+    userStore.clearAccessToken();
+    userStore.clearUserData();
     router.push({ name: "Login" });
     router.go(0);
   } catch (error) {
@@ -129,16 +131,19 @@ const handleLogout = async (): Promise<void> => {
           <div class="avatar-info">
             <p class="title">
               {{
-                parseNameLength(
-                  `${userData.payload.firstName} ${userData.payload.lastName}`
-                )
+                Object.keys(userStore.userData).length > 0
+                  ? parseNameLength(
+                      `${userStore.userData.payload.firstName} ${userStore.userData.payload.lastName}`
+                    )
+                  : ""
               }}
             </p>
             <p class="subtitle">
               {{
-                userData.payload.Role.code === "SA"
-                  ? userData.payload.Role.name
-                  : userData.payload.UserSubscription[0]?.Subscription.name
+                userStore.userData?.payload?.Role.code === "SA"
+                  ? userStore.userData?.payload?.Role.name
+                  : userStore.userData?.payload?.UserSubscription[0]
+                      ?.Subscription?.name
               }}
             </p>
           </div>
@@ -150,8 +155,8 @@ const handleLogout = async (): Promise<void> => {
                     (item) => item.key === 'notification'
                   )[0].badgeValue as number) > 0
                 "
-              :firstName="userData.payload.firstName"
-              :lastName="userData.payload.lastName"
+              :firstName="userStore.userData?.payload?.firstName"
+              :lastName="userStore.userData?.payload?.lastName"
               :size="40"
             />
           </div>
