@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import { AuthenticationRoutes } from "@/routers/Authentication";
 import { CommonUserRoutes } from "@/routers/CommonUser";
-import { SuperAdminRoutes } from "./SuperAdmin";
+import { SuperAdminRoutes } from "@/routers/SuperAdmin";
+import { GeneralPrivateRoutes } from "@/routers/GeneralPrivate";
 
 import LandingPage from "@/pages/base/LandingPage.vue";
 import NotFoundPage from "@/pages/base/NotFoundPage.vue";
@@ -18,6 +19,7 @@ export const router = createRouter({
     ...AuthenticationRoutes,
     ...SuperAdminRoutes,
     ...CommonUserRoutes,
+    ...GeneralPrivateRoutes,
     {
       path: "/",
       component: LandingPage,
@@ -67,13 +69,17 @@ router.beforeEach((to, _from, next) => {
     if (userData.isExpired || userData.isInvalidToken) {
       removeCookie("accessToken");
       next({ name: "Login" });
-      return router.go(0)
+      return router.go(0);
     } else {
       const userRole = userData.payload.Role.code;
 
       if (isAuthPage) {
         return next({ path: "/dashboard" });
-      } else if (isPrivatePage && authorization !== userRole) {
+      } else if (
+        isPrivatePage &&
+        authorization !== userRole &&
+        authorization !== "GP"
+      ) {
         return findMatchRouteName(userRole);
       }
     }

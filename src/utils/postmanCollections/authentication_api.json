@@ -48,7 +48,7 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "•••••••",
+										"value": "{{x_access_token}}",
 										"type": "text"
 									}
 								],
@@ -62,14 +62,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/auth/register",
-									"protocol": "http",
+									"raw": "{{base_url}}{{api_route}}/auth/register",
 									"host": [
-										"localhost"
+										"{{base_url}}{{api_route}}"
 									],
-									"port": "3000",
 									"path": [
-										"api",
 										"auth",
 										"register"
 									]
@@ -380,14 +377,11 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/api/auth/register/checkUsername?username=bhaks3938",
-									"protocol": "http",
+									"raw": "{{base_url}}{{api_route}}/auth/register/checkUsername?username=bhaks3938",
 									"host": [
-										"localhost"
+										"{{base_url}}{{api_route}}"
 									],
-									"port": "3000",
 									"path": [
-										"api",
 										"auth",
 										"register",
 										"checkUsername"
@@ -498,19 +492,16 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "•••••••",
+										"value": "{{x_access_token}}",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/api/auth/emailVerification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAxNTk1MjY1fQ.R3vx7ISOgBx0DSyjuuOIVLBnpllqA9Y2Y3ODEpezXZA",
-									"protocol": "http",
+									"raw": "{{base_url}}{{api_route}}/auth/emailVerification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAxNTk1MjY1fQ.R3vx7ISOgBx0DSyjuuOIVLBnpllqA9Y2Y3ODEpezXZA",
 									"host": [
-										"localhost"
+										"{{base_url}}{{api_route}}"
 									],
-									"port": "3000",
 									"path": [
-										"api",
 										"auth",
 										"emailVerification"
 									],
@@ -663,7 +654,7 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "•••••••",
+										"value": "{{x_access_token}}",
 										"type": "text"
 									}
 								],
@@ -677,14 +668,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/auth/login",
-									"protocol": "http",
+									"raw": "{{base_url}}{{api_route}}/auth/login",
 									"host": [
-										"localhost"
+										"{{base_url}}{{api_route}}"
 									],
-									"port": "3000",
 									"path": [
-										"api",
 										"auth",
 										"login"
 									]
@@ -852,7 +840,7 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "•••••••",
+										"value": "{{x_access_token}}",
 										"type": "text"
 									}
 								],
@@ -866,14 +854,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/auth/login/verifyLogin",
-									"protocol": "http",
+									"raw": "{{base_url}}{{api_route}}/auth/login/verifyLogin",
 									"host": [
-										"localhost"
+										"{{base_url}}{{api_route}}"
 									],
-									"port": "3000",
 									"path": [
-										"api",
 										"auth",
 										"login",
 										"verifyLogin"
@@ -994,19 +979,16 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "•••••••",
+										"value": "{{x_access_token}}",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/api/auth/logout",
-									"protocol": "http",
+									"raw": "{{base_url}}{{api_route}}/auth/logout",
 									"host": [
-										"localhost"
+										"{{base_url}}{{api_route}}"
 									],
-									"port": "3000",
 									"path": [
-										"api",
 										"auth",
 										"logout"
 									]
@@ -1024,6 +1006,446 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Logout success\",\n    \"status\": true,\n    \"statusCode\": 200,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "My Token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{x_access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}{{api_route}}/auth/profile",
+							"host": [
+								"{{base_url}}{{api_route}}"
+							],
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - My Token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/profile",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"profile"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User Access Token\",\n    \"status\": true,\n    \"statusCode\": 200,\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoiQW9uZSIsImxhc3ROYW1lIjoiU3VwZXIgQWRtaW4iLCJ1c2VybmFtZSI6InN1cGVyYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFvbmUuYmhha3RpYnVhbmEuY29tIiwicm9sZUlkIjoxLCJpc1ZlcmlmaWVkIjp0cnVlLCJSb2xlIjp7ImlkIjoxLCJjb2RlIjoiU0EiLCJuYW1lIjoiU3VwZXIgQWRtaW4ifSwiVXNlclN1YnNjcmlwdGlvbiI6W10sImxvZ2luTG9nSWQiOjIyLCJpYXQiOjE3MDIyMjE4MDMsImV4cCI6MTcwMjgyNjYwM30.PRuQQPe59qKITXBob5KcHVpcwKCf7jk38Qh5EB3ileY\"\n    },\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "401 - My Token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/profile",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"profile"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid Access Token\",\n    \"status\": false,\n    \"statusCode\": 401,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User Info",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{x_access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Bhakti\",\n    \"lastName\": \"Mega Buana\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{api_route}}/auth/profile/userInfo",
+							"host": [
+								"{{base_url}}{{api_route}}"
+							],
+							"path": [
+								"auth",
+								"profile",
+								"userInfo"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Update User Info",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstNameasdasd\": \"Bhakti\",\n    \"lastNameasdasd\": \"Mega Buana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/profile/userInfo",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"profile",
+										"userInfo"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Update User Info success\",\n    \"status\": true,\n    \"statusCode\": 200,\n    \"data\": [\n        1\n    ],\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "400 - Update User Info",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstNameasdasd\": \"Bhakti\",\n    \"lastNameasdasd\": \"Mega Buana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/profile/userInfo",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"profile",
+										"userInfo"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Update User Info failed\",\n    \"status\": false,\n    \"statusCode\": 400,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{x_access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"11234567890\",\n    \"newPassword\": \"1234567890\",\n    \"newPasswordConfirmation\": \"1234567890\",\n    \"encrypted\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{api_route}}/auth/profile/changePassword",
+							"host": [
+								"{{base_url}}{{api_route}}"
+							],
+							"path": [
+								"auth",
+								"profile",
+								"changePassword"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Change Password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"oldPassword\": \"11234567890\",\n    \"newPassword\": \"1234567890\",\n    \"newPasswordConfirmation\": \"1234567890\",\n    \"encrypted\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/profile/changePassword",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"profile",
+										"changePassword"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Change password success\",\n    \"status\": true,\n    \"statusCode\": 200,\n    \"data\": [\n        1\n    ],\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "400 - Change Password (does not match)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"oldPassword\": \"\",\n    \"newPassword\": \"\",\n    \"newPasswordConfirmation\": \"\",\n    \"encrypted\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/profile/changePassword",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"profile",
+										"changePassword"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password does not match\",\n    \"status\": false,\n    \"statusCode\": 400,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "400 - Change Password (wrong password)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"oldPassword\": \"\",\n    \"newPassword\": \"\",\n    \"newPasswordConfirmation\": \"\",\n    \"encrypted\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/profile/changePassword",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"profile",
+										"changePassword"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Wrong old password\",\n    \"status\": false,\n    \"statusCode\": 400,\n    \"data\": null,\n    \"pagination\": {}\n}"
+						},
+						{
+							"name": "400 - Change Password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{x_access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"oldPassword\": \"\",\n    \"newPassword\": \"\",\n    \"newPasswordConfirmation\": \"\",\n    \"encrypted\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{api_route}}/auth/profile/changePassword",
+									"host": [
+										"{{base_url}}{{api_route}}"
+									],
+									"path": [
+										"auth",
+										"profile",
+										"changePassword"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Change password failed\",\n    \"status\": false,\n    \"statusCode\": 400,\n    \"data\": null,\n    \"pagination\": {}\n}"
 						}
 					]
 				}

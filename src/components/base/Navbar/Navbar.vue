@@ -48,7 +48,7 @@ const avatarDropdownList = reactive<IDropdownMenuList[]>([
     key: "notification",
     label: "Notification",
     icon: "bell",
-    badgeValue: 990,
+    badgeValue: 27,
     hasDivider: true,
   },
   {
@@ -70,6 +70,9 @@ const handleCollapse = (): void => {
 
 const handleClickAvatarDropdown = (key: string): void => {
   switch (key) {
+    case "profile":
+      router.push({ name: "GPProfile" });
+      break;
     case "logout":
       logoutState.isModalOpen = true;
       break;
@@ -88,7 +91,7 @@ const handleLogout = async (): Promise<void> => {
     await APILogout.logout();
     removeCookie("accessToken");
     router.push({ name: "Login" });
-    router.go(0)
+    router.go(0);
   } catch (error) {
     notification["error"]({
       message: "Error",

@@ -31,8 +31,8 @@ defineProps({
     default: {},
   },
   fontSize: {
-    type: Number,
-    default: tokenProperties.defaultFontSize,
+    type: String,
+    default: `${tokenProperties.defaultFontSize}px`,
   },
 });
 </script>

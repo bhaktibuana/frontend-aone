@@ -72,7 +72,11 @@ onMounted(() => {
                   {{ menu.label }}
                 </div>
 
-                <a-badge :count="menu.badgeValue" :offset="[-8, 0]" :overflow-count="99">
+                <a-badge
+                  :count="menu.badgeValue"
+                  :offset="[-8, 0]"
+                  :overflow-count="9"
+                >
                   <div class="badge-item"></div>
                 </a-badge>
               </div>
@@ -91,6 +95,7 @@ onMounted(() => {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-width: $size-130;
   color: $default-text-color;
 
   .item-wrapper {

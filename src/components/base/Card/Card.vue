@@ -1,11 +1,11 @@
 <template>
-  <div class="wrapper">
+  <div class="card-wrapper">
     <slot></slot>
   </div>
 </template>
 
 <style scoped lang="scss">
-.wrapper {
+.card-wrapper {
   background-color: $white;
   padding: $size-24;
   border-radius: $size-8;
