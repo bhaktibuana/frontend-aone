@@ -15,3 +15,4 @@ export type { IDropdownMenuList } from "@/types/components/base/Dropdown/IDropdo
 export type { IScreenSize } from "@/types/components/HOC/WindowSize/IScreenSize.type";
 export type { IUserInfoFormData } from "@/types/pages/GeneralPrivate/Profile/IUserInfoFormData.type";
 export type { IPasswordFormData } from "@/types/pages/GeneralPrivate/Profile/IPasswordFormData.type";
+export type { TSidebarMenu } from "@/types/components/base/Sidebar/TSidebarMenu.type";

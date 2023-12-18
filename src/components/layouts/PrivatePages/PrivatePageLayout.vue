@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { h, onMounted, ref, watch } from "vue";
 
 import WindowSize from "@/components/HOC/WindowSize.vue";
 import BaseSidebar from "@/components/base/Sidebar/Sidebar.vue";
@@ -7,13 +7,34 @@ import BaseNavbar from "@/components/base/Navbar/Navbar.vue";
 
 import { useUserStore } from "@/store";
 
-import { IScreenSize } from "@/types";
+import { IScreenSize, TSidebarMenu } from "@/types";
+
+import { IconSettingsCog } from "@tabler/icons-vue";
+
+const tempMenuList: TSidebarMenu = [
+  {
+    key: "/settings",
+    label: "Settings",
+    icon: h(IconSettingsCog, { size: 22, strokeWidth: 1.6 }),
+    authorization: "GP",
+    children: [
+      {
+        key: "/setting/paymen-methods",
+        label: "Payment Methods",
+        title: "CUPaymentMethods",
+        authorization: "CU",
+      },
+    ],
+  },
+];
 
 const userStore = useUserStore();
 
 const collapsed = ref<boolean>(false);
 const mobileViewState = ref<boolean>(false);
 const screenWidth = ref<number>(0);
+
+const menuList = ref<TSidebarMenu>([] as TSidebarMenu);
 
 const handleMobileViewChange = (value: boolean): void => {
   mobileViewState.value = value;
@@ -25,6 +46,23 @@ const handleCollapse = (value: boolean): void => {
 
 const handleScreenSizeChange = (value: IScreenSize): void => {
   screenWidth.value = value.width;
+};
+
+const filterMenuList = (
+  authCode: TSidebarMenu[0]["authorization"]
+): TSidebarMenu => {
+  return tempMenuList
+    .map((item) => {
+      if (item.children === undefined) return item;
+      const children = item.children.filter(
+        (childItem) => childItem.authorization !== authCode
+      );
+      return {
+        ...item,
+        children,
+      };
+    })
+    .filter((item) => item.authorization !== authCode);
 };
 
 watch(
@@ -51,6 +89,18 @@ watch(
   { immediate: true }
 );
 
+watch(
+  () => userStore.userData,
+  (newValue) => {
+    if (Object.keys(newValue).length === 0) return;
+    if (newValue.payload.Role.code === "SA") {
+      menuList.value = filterMenuList("CU");
+    } else if (newValue.payload.Role.code === "CU") {
+      menuList.value = filterMenuList("SA");
+    }
+  }
+);
+
 onMounted(async () => {
   await userStore.fetchData();
 });
@@ -68,8 +118,9 @@ onMounted(async () => {
           :collapsed="collapsed"
           :width="isMobileView ? (screenWidth <= 340 ? '100%' : 340) : 240"
           :collapsedWidth="isMobileView ? 0 : 80"
+          :menu-list="menuList"
         />
-        <!-- v-if="isMobileView && !collapsed" -->
+
         <div
           :class="`backdrop-wrapper ${isMobileView && !collapsed && 'show'}`"
           @click="() => handleCollapse(true)"

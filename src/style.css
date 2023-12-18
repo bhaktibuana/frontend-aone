@@ -166,3 +166,69 @@ input[type="number"] {
 .ant-btn-default.ant-btn-dangerous:hover {
   color: white !important;
 }
+
+.ant-menu-light .ant-menu-item-selected {
+  background: #ebfbff !important;
+  color: #138ba9 !important;
+}
+
+.ant-menu-light .ant-menu-submenu-selected {
+  color: #138ba9 !important;
+
+  & > .ant-menu-submenu-title {
+    color: #138ba9 !important;
+  }
+}
+
+.ant-menu-inline > .ant-menu-item {
+  display: flex;
+  align-items: center;
+
+  & > .ant-menu-title-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
+.ant-menu-inline > .ant-menu-submenu {
+  & > .ant-menu-submenu-title {
+    display: flex;
+    align-items: center;
+
+    & > .ant-menu-title-content {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+}
+
+.ant-menu-light.ant-menu-horizontal > .ant-menu-item::after {
+  display: none !important;
+}
+
+.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu::after {
+  display: none !important;
+}
+
+.ant-menu-light.ant-menu-vertical > .ant-menu-submenu::after {
+  display: none !important;
+}
+
+.ant-menu-light {
+  background: unset;
+}
+
+.ant-menu-light.ant-menu-root.ant-menu-vertical {
+  border-inline-end: none;
+}
+
+.ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline {
+  background: none !important;
+}
+
+.ant-menu-title-content {
+  font-size: 15px;
+  font-weight: 500;
+}
